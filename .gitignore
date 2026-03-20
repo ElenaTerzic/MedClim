@@ -33,4 +33,6 @@ Data/
 # Large CSV / diagnostics
 *.csv
 
-
+# Seadatanet diagnostics
+Diagnostics/
+Scripts/Seadatanet/outputs/
