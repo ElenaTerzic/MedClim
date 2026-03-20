@@ -28,3 +28,9 @@ Stats/
 *.log
 
 Data/
+
+
+# Large CSV / diagnostics
+*.csv
+
+
