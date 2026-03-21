@@ -164,20 +164,20 @@ RANDOM_SEED = 42
 STYLES = {
     "SDN": {
         "marker": "o",
-        "s": 5,
+        "s": 6,              # was 5 → slightly larger
         "facecolor": "k",
         "edgecolor": "none",
-        "alpha": 0.28,
+        "alpha": 0.35,       # was 0.28 → slightly stronger
         "zorder": 3,
         "label": "SeaDataNet",
     },
     "ARGO": {
         "marker": "o",
-        "s": 5,
+        "s": 4,              # was 5
         "facecolor": "#8EC5E8",
         "edgecolor": "none",
-        "alpha": 0.42,
-        "zorder": 4,
+        "alpha": 0.30,       # was 0.42 → KEY CHANGE
+        "zorder": 2,         # lower than SDN
         "label": "Argo",
     },
     "ADRIATIC": {
@@ -193,16 +193,17 @@ STYLES = {
 }
 
 plt.rcParams.update({
-    "font.size": 11,
-    "axes.titlesize": 13,
+    "font.size": 13,
+    "axes.titlesize": 14,
     "axes.titleweight": "bold",
-    "axes.labelsize": 11,
+    "axes.labelsize": 12,
     "axes.labelweight": "bold",
-    "xtick.labelsize": 10,
-    "ytick.labelsize": 10,
-    "legend.fontsize": 10,
-    "figure.titlesize": 15,
+    "xtick.labelsize": 13,
+    "ytick.labelsize": 13,
+    "legend.fontsize": 13,
+    "figure.titlesize": 16,
 })
+
 
 AX_FACE = "#f0f0f0"
 FIG_FACE = "white"
@@ -593,8 +594,8 @@ def load_temporal_counts_from_sources() -> pd.DataFrame:
 
 def draw_temporal_panel(ax, d_counts: pd.DataFrame) -> None:
     ax.set_title("b  Temporal evolution of observations", loc="left")
-    ax.set_ylabel("Number of unique profiles")
-    ax.set_xlabel("Year")
+    ax.set_ylabel("Number of unique profiles", fontsize=12)
+    ax.set_xlabel("Year", fontsize=12)
     ax.grid(True, axis="y", alpha=0.25, linewidth=0.5)
 
     if d_counts.empty:
@@ -830,7 +831,7 @@ def draw_map_panel(ax, df_points: pd.DataFrame) -> None:
 
     rng = np.random.default_rng(RANDOM_SEED)
 
-    for grp in ["SDN", "ADRIATIC", "ARGO"]:
+    for grp in ["ARGO", "SDN", "ADRIATIC"]:
         g = df_points[df_points["source_group"] == grp].copy()
         if g.empty:
             continue
@@ -842,8 +843,7 @@ def draw_map_panel(ax, df_points: pd.DataFrame) -> None:
         else:
             ax.scatter(g["lon"], g["lat"], label=label, **st)
 
-    #ax.set_title("a  Spatial distribution of observations", loc="left")
-    ax.set_title("a  Spatial distribution of observations", loc="left", pad=6)
+    ax.set_title("a  Spatial distribution of observations", loc="left", pad=6, fontsize=14, fontweight="bold")
     if HAVE_CARTOPY:
         ax.set_xticks([-10, 0, 10, 20, 30, 40], crs=ccrs.PlateCarree())
         ax.set_yticks([30, 35, 40, 45], crs=ccrs.PlateCarree())
@@ -875,15 +875,15 @@ def draw_map_panel(ax, df_points: pd.DataFrame) -> None:
         framealpha=0.95,
         facecolor="white",
         fontsize=13,
-        borderpad=0.7,
-        labelspacing=0.45,
+        borderpad=0.8,
+        labelspacing=0.5,
         handlelength=1.2
     )
 
 def draw_temporal_panel(ax, d_counts: pd.DataFrame) -> None:
-    ax.set_title("b  Temporal evolution of observations", loc="left")
-    ax.set_ylabel("Number of unique profiles")
-    ax.set_xlabel("Year")
+    ax.set_title("b  Temporal evolution of observations", loc="left", pad=6, fontsize=14, fontweight="bold")
+    ax.set_ylabel("Number of unique profiles", fontsize=12)
+    ax.set_xlabel("Year", fontsize=12)
     ax.grid(True, axis="y", alpha=0.25, linewidth=0.5)
 
     if d_counts.empty:
@@ -917,6 +917,9 @@ def draw_temporal_panel(ax, d_counts: pd.DataFrame) -> None:
             color=color, edgecolor="none", label=STYLES[grp]["label"]
         )
         base += y
+
+    ax.tick_params(axis="both", which="major", length=4, width=0.8)
+    ax.tick_params(axis="both", which="minor", length=2, width=0.6)
 
     ax.legend(loc="upper left", frameon=False)
 
@@ -959,9 +962,9 @@ def draw_hov_panel(ax, da: pd.DataFrame, basin: str, panel_label: str, subtitle:
     ax.set_facecolor(AX_FACE)
     ax.invert_yaxis()
     ax.set_title(f"{panel_label}  {subtitle}", loc="left")
-    ax.set_xlabel("Year")
+    ax.set_xlabel("Year", fontsize=12)
     if show_ylabel:
-        ax.set_ylabel("Depth (m)")
+        ax.set_ylabel("Depth (m)", fontsize=12)
     else:
         ax.set_ylabel("")
     ax.set_xlim(YEAR_MIN - 0.5, YEAR_MAX + 0.5)
@@ -971,12 +974,15 @@ def draw_hov_panel(ax, da: pd.DataFrame, basin: str, panel_label: str, subtitle:
     if len(yt) >= 2:
         ax.set_yticks(yt)
 
+    ax.tick_params(axis="both", which="major", labelsize=11)
+
     cbar = plt.colorbar(pcm, ax=ax, pad=0.02, fraction=0.045, aspect=24)
     if show_cbar_label:
-        cbar.set_label("Temperature anomaly (°C)")
+        cbar.set_label("Temperature anomaly (°C)", fontsize=12)
+        cbar.ax.tick_params(labelsize=12)
     else:
         cbar.set_label("")
-    cbar.ax.tick_params(labelsize=9)
+    cbar.ax.tick_params(labelsize=10)
 
 
 # ==========================================================
@@ -1021,7 +1027,7 @@ def main() -> None:
 
     print("[INFO] Creating figure")
 
-    fig = plt.figure(figsize=(16, 14), facecolor=FIG_FACE)
+    fig = plt.figure(figsize=(14, 12), facecolor=FIG_FACE)
     gs = fig.add_gridspec(
         3, 2,
         height_ratios=[1.55, 0.92, 1.12],
@@ -1038,7 +1044,7 @@ def main() -> None:
     ax_med = fig.add_subplot(gs[2, 0])
     ax_nwm = fig.add_subplot(gs[2, 1])
 
-    fig.subplots_adjust(left=0.055, right=0.985, top=0.955, bottom=0.06)
+    fig.subplots_adjust(left=0.055, right=0.985, top=0.93, bottom=0.06)
 
     draw_map_panel(ax_map, df_points)
     d_counts = load_temporal_counts_from_sources()
@@ -1061,12 +1067,12 @@ def main() -> None:
         show_cbar_label=True,
     )
 
-    fig.suptitle(
-        "Figure 1. Observational data set and coverage",
-        y=0.978,
-        fontsize=16,
-        fontweight="bold"
-    )
+    #fig.suptitle(
+    #    "Figure 1. Observational data set and coverage",
+    #    y=0.975,
+    #    fontsize=17,
+    #    fontweight="bold"
+    #)
     footer = (
         "Panel (b): annual counts are unique profiles/casts per source. "
         "Panels (c-d): yearly temperature anomalies relative to 1950-1999"
@@ -1074,7 +1080,8 @@ def main() -> None:
     if APPLY_ROLLING:
         footer += f"; {ROLLING_YEARS}-year smoothing applied."
 
-    fig.text(0.5, 0.015, footer, ha="center", va="bottom", fontsize=10)
+    # Comment the footer - use the text as a caption instead
+    #fig.text(0.5, 0.015, footer, ha="center", va="bottom", fontsize=12)
 
     fig.savefig(OUTPNG, dpi=DPI, bbox_inches="tight")
     fig.savefig(OUTPDF, dpi=DPI, bbox_inches="tight")
