@@ -67,17 +67,19 @@ OUT_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_a
 
 # Prefer this explicit dictionary first.
 # Adjust if your exact composed naming differs.
-COMPOSED_BASINS: Dict[str, List[str]] = {
+COMPOSED_BASINS = {
     "ALB":  ["DS1"],
     "WEST": ["DS2", "DS3", "DS4", "DI1"],
     "NWM":  ["DF1", "DF2", "DF3", "DF4"],
     "TYR":  ["DT1", "DT2", "DT3"],
-    "SIC":  ["DI3", "DJ4", "DJ5"],
-    "ION":  ["DJ6", "DJ7", "DJ8", "DH1"],
-    "LEV":  ["DL1", "DL2", "DL3", "DL4", "DH2", "DH3"],
+    "SIC":  ["DI3"],
     "NADR": ["DJ1"],
     "MADR": ["DJ2"],
     "SADR": ["DJ3"],
+    "ION":  ["DJ4", "DJ5", "DJ6", "DJ7", "DJ8"],
+    "NAEG": ["DH1"],
+    "SAEG": ["DH2"],
+    "LEV":  ["DL1", "DL2", "DL3", "DL4", "DH3"],
 }
 
 # Optional: try Basins.manca if available.

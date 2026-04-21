@@ -831,7 +831,8 @@ def plot_profile_block(
 
     axT.set_xlabel("ΔT [°C]")
     axS.set_xlabel("ΔS [-]")
-    axD.set_xlabel("Δσ₀ [kg m⁻³]")
+    #axD.set_xlabel("Δσ₀ [kg m⁻³]")
+    axD.set_xlabel("ΔPDA [kg m⁻³]")
 
     axT.set_xlim(*xlims["dT"])
     axS.set_xlim(*xlims["dS"])
@@ -1042,12 +1043,14 @@ def main():
 
     plot_delta_map(ax_a, basin_polys, delta_T, DEPTH_TAG_MAP, DELTA_T_LIM, "ΔT @ 200 m", "a")
     plot_delta_map(ax_b, basin_polys, delta_S, DEPTH_TAG_MAP, DELTA_S_LIM, "ΔS @ 200 m", "b")
-    plot_delta_map(ax_c, basin_polys, delta_D, DEPTH_TAG_MAP, DELTA_SIG0_LIM, "Δσ₀ @ 200 m", "c")
+    #plot_delta_map(ax_c, basin_polys, delta_D, DEPTH_TAG_MAP, DELTA_SIG0_LIM, "Δσ₀ @ 200 m", "c")
+    plot_delta_map(ax_c, basin_polys, delta_D, DEPTH_TAG_MAP, DELTA_SIG0_LIM, "ΔPDA @ 200 m", "c")
 
     for ax, lim, unit, ticks in [
         (ax_a, DELTA_T_LIM, "ΔT [°C]", np.arange(-0.8, 0.81, 0.2)),
         (ax_b, DELTA_S_LIM, "ΔS [-]", np.arange(-0.20, 0.201, 0.05)),
-        (ax_c, DELTA_SIG0_LIM, "Δσ₀ [kg m⁻³]", np.arange(-0.08, 0.081, 0.02)),
+        #(ax_c, DELTA_SIG0_LIM, "Δσ₀ [kg m⁻³]", np.arange(-0.08, 0.081, 0.02)),
+        (ax_c, DELTA_SIG0_LIM, "ΔPDA [kg m⁻³]", np.arange(-0.08, 0.081, 0.02)),
     ]:
         cax = ax.inset_axes([0.08, -0.16, 0.84, 0.065])
         sm = mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(*lim), cmap=MAP_CMAP)
