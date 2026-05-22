@@ -352,7 +352,7 @@ def pass_stats(csv_path, qc_on=True, first_pass_means=None, first_pass_stds=None
                 vstd = linear_interp_nan(z, v, STD_DEPTHS)
             else:
                 vstd = reiniger_ross(z, v, STD_DEPTHS)
-                # debug RR overshoot BEFORE clamping (guard all-nan)
+                # Inspect RR overshoot before clamping when values are finite
                 if np.isfinite(vstd).any():
                     mn = np.nanmin(vstd); mx = np.nanmax(vstd)
                     if (mn < -5) or (mx > 45):

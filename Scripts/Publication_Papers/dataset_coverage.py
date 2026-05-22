@@ -95,25 +95,25 @@ except ImportError as e:
 # ----------------------------
 # Map point files
 # ----------------------------
-SDN_MAP_CSV = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv"
-ARGO_MAP_CSV = "/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded_profile_diagnostics.csv"
+SDN_MAP_CSV = str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv")
+ARGO_MAP_CSV = str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded_profile_diagnostics.csv")
 
 ADRIATIC_MAP_CSVS = [
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded_profile_diagnostics.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded_profile_diagnostics.csv",
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
 ]
 
 # ----------------------------
 # Monthly composed series for Hovmöllers
 # ----------------------------
-MONTHLY_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins_composed.csv"
+MONTHLY_COMPOSED_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins_composed.csv")
 
 # ----------------------------
 # Output
 # ----------------------------
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+OUTDIR = str(PROJECT_ROOT / "Plots/Paper_Figures")
 OUTPNG = os.path.join(OUTDIR, "Figure1_dataset_coverage_3row.png")
 OUTPDF = os.path.join(OUTDIR, "Figure1_dataset_coverage_3row.pdf")
 DPI = 400
@@ -344,14 +344,14 @@ from collections import defaultdict
 
 # ---- Files for temporal counts ----
 # Use the files whose schema is appropriate for cast counting.
-SDN_COUNT_FILE = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only.csv"
-ARGO_COUNT_FILE = "/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"
+SDN_COUNT_FILE = str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only.csv")
+ARGO_COUNT_FILE = str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv")
 
 ADRIATIC_COUNT_FILES = [
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv",
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv",
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+    str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
 ]
 
 COUNT_CHUNKSIZE = 400_000
@@ -1066,22 +1066,6 @@ def main() -> None:
         show_ylabel=False,
         show_cbar_label=True,
     )
-
-    #fig.suptitle(
-    #    "Figure 1. Observational data set and coverage",
-    #    y=0.975,
-    #    fontsize=17,
-    #    fontweight="bold"
-    #)
-    footer = (
-        "Panel (b): annual counts are unique profiles/casts per source. "
-        "Panels (c-d): yearly temperature anomalies relative to 1950-1999"
-    )
-    if APPLY_ROLLING:
-        footer += f"; {ROLLING_YEARS}-year smoothing applied."
-
-    # Comment the footer - use the text as a caption instead
-    #fig.text(0.5, 0.015, footer, ha="center", va="bottom", fontsize=12)
 
     fig.savefig(OUTPNG, dpi=DPI, bbox_inches="tight")
     fig.savefig(OUTPDF, dpi=DPI, bbox_inches="tight")

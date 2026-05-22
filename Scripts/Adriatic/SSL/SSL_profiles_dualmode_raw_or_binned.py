@@ -849,7 +849,7 @@ def main() -> None:
     cast_df.to_csv(OUTDIR / "cast_summary.csv", index=False)
     print("Wrote:", OUTDIR / "cast_summary.csv")
 
-    # --- Quick totals by source/period to verify in-situ are included
+    # Summarize source and period coverage in the retained cast table
     print("\nTOTAL casts by source/period:")
     print(cast_df.groupby(["source", "period"]).size())
 
@@ -870,7 +870,6 @@ def main() -> None:
     plt.bar(x + width/2, c21, width, label="21c", color='darkorange')
     plt.xticks(x, seasons_order)
     plt.ylabel("Number of casts")
-    #plt.title(f"{TARGET_BASIN}: sample size per season (all casts)")
     plt.title(f"Sample size per season (all casts)")
     plt.legend()
     plt.tight_layout()
@@ -889,7 +888,6 @@ def main() -> None:
     plt.bar(x + width/2, pct21, width, label="21c", color='darkorange')
     plt.xticks(x, seasons_order)
     plt.ylabel("SSL percentage (%)")
-    #plt.title(f"{TARGET_BASIN}: SSL occurrence ({DETECT_MODE}, SG<{SG_THRES:g}, z<={SSL_ZMAX:g}m)")
     plt.title(f"SSL occurrence (SG<{SG_THRES:g}, z<={SSL_ZMAX:g}m)")
     plt.legend()
     plt.tight_layout()

@@ -522,11 +522,6 @@ def main():
     print("Counting casts-by-bin (T only)...")
     df = count_casts_by_bin(basin_list)
     
-    #print(df[df["basin"].astype(str).str.lower().eq("out")]
-      #.groupby(["source","period","season"], as_index=False)["n_casts"].sum()
-      #.sort_values("n_casts", ascending=False)
-      #.head(50))
-
     if df.empty:
         print("No data found. Check input paths.")
         return

@@ -3,7 +3,7 @@
 """
 plot_manca_all_basins_publication_SIG0_maps_support.py
 
-Generalizes Elena's DJ1/DJ3 publication-ready figure to ALL Manca basins
+Generalizes the Adriatic publication-style layout to all Manca basins
 (atomic and/or composed), keeping the exact same layout and logic.
 
 Layout:

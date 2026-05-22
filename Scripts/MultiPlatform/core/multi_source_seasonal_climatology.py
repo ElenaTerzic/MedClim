@@ -33,7 +33,6 @@ Notes:
 - For COMPOSED mode, rows whose atomic basin is not mapped are skipped by default.
 - If you want to include “unmapped” basins in COMPOSED mode, set INCLUDE_UNMAPPED_IN_COMPOSED=True.
 
-Author: adapted for Elena’s MedClim pipeline
 """
 
 from __future__ import annotations
@@ -58,13 +57,14 @@ import pandas as pd
 # =============================================================================
 # CONFIG YOU EDIT
 # =============================================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 PERIODS = {
     "20c_1950_1999": (1950, 1999),
-    "21c_2000_2025": (2000, 2025), #before I had 2019 for AA
+    "21c_2000_2025": (2000, 2025),
 }
 
-OUTDIR_BASE = Path("/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG")
+OUTDIR_BASE = Path(str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG"))
 
 SAVE_FILES = True
 SAVE_PER_SOURCE = True
@@ -267,7 +267,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv")),
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -289,7 +289,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv")),
         time_col="TIME",
         time_format="%Y-%m-%dT%H:%M:%S",
         basin_col="basin",
@@ -310,7 +310,7 @@ SOURCES: List[SourceSpec] = [
     # --- Adriatic local datasets (fixed) ---
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -325,7 +325,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -340,7 +340,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -355,7 +355,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -1008,7 +1008,7 @@ def dump_csv(accT, accS, n_total, n_eligible, scheme_used, out_csv: Path, accSIG
         fracT[okE] = tn[okE] / elig[okE]
         fracS[okE] = sn[okE] / elig[okE]
 
-        # Old denom (all casts) fractions for debugging
+        # Fractions relative to all casts, retained for optional diagnostics
         if nprof > 0:
             fracT_all = tn / float(nprof)
             fracS_all = sn / float(nprof)

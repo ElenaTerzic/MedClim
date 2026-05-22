@@ -72,21 +72,22 @@ from scipy.optimize import curve_fit
 # USER SETTINGS
 # ==========================================================
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
 # --- project paths ---
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
+MANCA_PY = str(PROJECT_ROOT.parents[1] / "Basins" / "Basins" / "manca.py")
 
 # --- map data: same input as working delta maps ---
-MONTHLY_TIMESERIES_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
+MONTHLY_TIMESERIES_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins.csv")
 
 # --- climatology CSVs: composed basins ---
-CLIM_21C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv"
-CLIM_20C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv"
+CLIM_21C_COMPOSED_CSV = str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv")
+CLIM_20C_COMPOSED_CSV = str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv")
 
 # --- raw profile sources (same philosophy as T-S script) ---
-PROJECT_ROOT = "/Users/elena/Projects/IRB/MedClim"
 
 # --- output ---
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+OUTDIR = str(PROJECT_ROOT / "Plots/Paper_Figures")
 OUTPNG = os.path.join(OUTDIR, "Figure2_composite_maps_profiles_TS.png")
 OUTPDF = os.path.join(OUTDIR, "Figure2_composite_maps_profiles_TS.pdf")
 
@@ -1106,11 +1107,6 @@ def main():
         ts_axes[1].legend(handles=ts_handles, loc="upper left", frameon=False)
     elif len(ts_axes) >= 1:
         ts_axes[0].legend(handles=ts_handles, loc="upper left", frameon=False)
-
-    #fig.suptitle(
-    #    "21st–20th century Mediterranean hydrographic change",
-    #    y=0.985, fontsize=16, fontweight="bold"
-    #) #Figure 2. 
 
     fig.savefig(OUTPNG, dpi=300, bbox_inches="tight")
     fig.savefig(OUTPDF, dpi=300, bbox_inches="tight")

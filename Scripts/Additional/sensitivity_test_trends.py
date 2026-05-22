@@ -34,8 +34,9 @@ import matplotlib.pyplot as plt
 # ==========================================================
 # USER CONFIG
 # ==========================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends"
+BASE_DIR = str(PROJECT_ROOT / "Results/Trends")
 
 PATHS = {
     "atomic": {

@@ -61,9 +61,10 @@ import pandas as pd
 # ==========================================================
 # USER CONFIG
 # ==========================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
-OUT_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins_composed.csv"
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins.csv")
+OUT_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins_composed.csv")
 
 # Prefer this explicit dictionary first.
 # Adjust if your exact composed naming differs.

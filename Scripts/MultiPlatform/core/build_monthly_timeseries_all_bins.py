@@ -37,7 +37,7 @@ from Scripts.MultiPlatform.core import multi_source_seasonal_climatology as msc
 # SETTINGS
 # =========================
 
-OUT_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
+OUT_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins.csv")
 
 YEAR_MIN = 1950
 YEAR_MAX = 2025

@@ -40,10 +40,11 @@ from matplotlib.cm import ScalarMappable
 # ==========================================================
 # USER CONFIG
 # ==========================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv")
 
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+OUT_DIR = str(PROJECT_ROOT / "Plots/Paper_Figures")
 OUT_NAME = "Figure4_vertical_trend_acceleration_3basins_horizontal.png"
 
 BASINS = ["NWM", "ION", "LEV"]
@@ -522,14 +523,6 @@ def build_paper_figure(
         ha="center", va="center",
         fontsize=NOTE_FONTSIZE
     )
-
-    #fig.suptitle(
-    #    "Quadratic-fit vertical structure (1950–2025)\n"
-    #    "Representative Mediterranean basins: NWM, ION, LEV",
-    #    fontsize=TITLE_FONTSIZE,
-    #    y=0.965,
-    #    linespacing=1.05
-    #)
 
     Path(out_png).parent.mkdir(parents=True, exist_ok=True)
     # --- Save PNG ---

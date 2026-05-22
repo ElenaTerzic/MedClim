@@ -482,13 +482,6 @@ def plot_one_basin(
         plt.close(fig)
         return
 
-    #title = f"{basin}: yearly anomalies relative to {REF_YEAR_MIN}–{REF_YEAR_MAX}"
-    #if APPLY_ROLLING and ROLLING_YEARS > 1:
-    #    title += f" | {ROLLING_YEARS}-yr running mean"
-    #title += f" | zmax={int(round(zmax_plot))} m"
-
-    #fig.suptitle(title, fontsize=16, weight="bold")
-
     fig.suptitle(
         f"{basin} – Temperature, Salinity, Density anomalies\n"
         f"(reference: 1950–1999, 3-year smoothing)",

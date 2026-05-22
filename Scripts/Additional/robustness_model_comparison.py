@@ -38,9 +38,10 @@ import matplotlib.pyplot as plt
 # ==========================================================
 # USER CONFIG
 # ==========================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Robustness/ModelComparison_composed"
+BASE_DIR = str(PROJECT_ROOT / "Results/Trends/Composed")
+OUT_DIR = str(PROJECT_ROOT / "Results/Trends/Robustness/ModelComparison_composed")
 
 LINEAR_CSV = os.path.join(BASE_DIR, "linear_trends_20c_21c_composed.csv")
 QUAD_CSV   = os.path.join(BASE_DIR, "quad_trend_accel_fullperiod_composed.csv")

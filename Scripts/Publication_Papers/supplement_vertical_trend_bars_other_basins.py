@@ -35,9 +35,10 @@ from matplotlib.cm import ScalarMappable
 # ==========================================================
 # USER CONFIG
 # ==========================================================
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Supplement"
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv")
+OUT_DIR = str(PROJECT_ROOT / "Plots/Supplement")
 
 SUPP_FIGURES = [
     {

@@ -51,6 +51,7 @@ from __future__ import annotations
 
 import os
 import argparse
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from math import erf, sqrt
@@ -59,8 +60,9 @@ from math import erf, sqrt
 # =========================
 # USER CONFIG
 # =========================
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends"
+BASE_DIR = str(PROJECT_ROOT / "Results/Trends")
 
 PATHS = {
     "atomic": {

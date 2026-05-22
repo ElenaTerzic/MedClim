@@ -4,35 +4,31 @@ This directory contains the SeaDataNet-only workflow used in the MedClim project
 
 ## Directory structure
 
-- `preprocessing/` – ODV export cleaning and Manca basin assignment
-- `diagnostics/` – platform, depth, and temporal diagnostics
-- `climatology/` – seasonal climatology building
-- `figures/` – profile and level-map plotting
-- `outputs/` – generated diagnostic tables (not source code)
-- `scratch_or_legacy/` – archived notes or obsolete files
+- `preprocessing/` - ODV export cleaning and Manca basin assignment
+- `diagnostics/` - platform, depth, and temporal diagnostics
+- `climatology/` - seasonal climatology building
+- `figures/` - profile and level-map plotting
+- `outputs/` - generated diagnostic tables that are not part of the tracked source code
 
 ## Main workflow
 
-1. `preprocessing/clean_seadatanet_odv_export.py`  
-   Clean raw ODV CSV export, normalize headers, and create cleaned/profile-only files.
+1. `preprocessing/clean_seadatanet_odv_export.py`
+   Clean the raw ODV CSV export, normalize headers, and create cleaned and profile-only files.
 
-2. `diagnostics/stats_depth_coverage_profiles_only.py`  
+2. `diagnostics/stats_depth_coverage_profiles_only.py`
    Evaluate depth coverage by cast.
 
-3. `figures/make_level_maps_TS.py`  
-   Build T/S level maps for selected depths.
-
-4. `diagnostics/barplot_profiles_per_year_platform.py`  
-   Summarize casts per year by platform.
-
-5. `preprocessing/seadatanet_assign_manca_basins.py`  
+3. `preprocessing/seadatanet_assign_manca_basins.py`
    Assign Manca basins and export basin-tagged CSV files.
 
-6. `climatology/manca_seasonal_climatology_TS.py`  
+4. `climatology/manca_seasonal_climatology_TS.py`
    Build seasonal climatologies by basin.
 
-7. `figures/plot_manca_like_profiles_per_basin.py`  
+5. `figures/plot_manca_like_profiles_per_basin.py`
    Plot seasonal climatological profiles.
+
+6. `figures/make_level_maps_TS.py`
+   Build temperature and salinity level maps for selected depths.
 
 ## Additional diagnostics
 
@@ -46,6 +42,5 @@ This directory contains the SeaDataNet-only workflow used in the MedClim project
 
 ## Notes
 
-- Scripts currently use local hard-coded paths.
-- Large generated CSV diagnostics should not be tracked in Git.
-- Data files are stored outside the repository.
+- Large generated CSV diagnostics are not tracked in Git.
+- SeaDataNet input files are expected in the project data layout used by the processing scripts.

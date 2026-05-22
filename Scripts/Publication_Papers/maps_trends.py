@@ -28,6 +28,7 @@ from __future__ import annotations
 import os
 import re
 import math
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -40,9 +41,10 @@ from shapely.geometry import Polygon
 # ==========================================================
 # EMBEDDED CONFIG
 # ==========================================================
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/quad_trend_accel_fullperiod_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/quad_trend_accel_fullperiod_atomic.csv")
+MANCA_PY = str(PROJECT_ROOT.parents[1] / "Basins" / "Basins" / "manca.py")
+OUT_DIR = str(PROJECT_ROOT / "Plots/Paper_Figures")
 
 OUT_BASENAME = "Figure3_trend_accel_surface_1000m"
 

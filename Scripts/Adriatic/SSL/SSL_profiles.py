@@ -616,15 +616,6 @@ def plot_cast_figure(
             axM.scatter([lon], [lat], s=35)
         axM.set_aspect("equal", adjustable="box")
 
-    # Compact suptitle (avoid overlap)
-    date_str = meta.get("date_str", "")
-    cast_id = str(meta.get("cast_id", ""))
-    cast_short = cast_id[:40] + ("…" if len(cast_id) > 40 else "")
-    has_ssl = meta.get("has_ssl", 0)
-    #fig.suptitle(
-    #    f"{date_str} | {cast_short} |",
-    #    y=0.98, fontsize=8
-    #)
     fig.tight_layout(rect=[0, 0, 1, 0.82])
 
     out_png.parent.mkdir(parents=True, exist_ok=True)
@@ -666,7 +657,7 @@ def main():
         df = df[df["_season"].notna()].copy()
         df["_period"] = np.where(df["_year"] < 2000, "20c", "21c")
 
-        # quick debug: rows distribution after basin+time filter
+        # Report retained rows after basin and time filtering
         print(f"  rows after basin/time filter: {len(df):,}")
 
         # group key: build a robust composite key from available cast_id_cols (e.g., Argo PLATFORM+ CYCLE)

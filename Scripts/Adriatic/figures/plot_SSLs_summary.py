@@ -327,8 +327,6 @@ draw_box(axE, "SG_core", "E) SG — by season, 20c vs 21c")
 draw_box(axF, "TG_core", "F) TG — by season, 20c vs 21c")
 
 # Overall figure title (kept high but not cramped)
-##fig.suptitle(f"{BASIN_LABEL} — Saline-lake SSL diagnostics (pooled sources)", y=1.02, fontsize=18)
-#fig.suptitle(f"Saline-lake SSL diagnostics", y=1.02, fontsize=18)
 
 # Save
 fig.savefig(OUTFIG, dpi=DPI, bbox_inches="tight")
