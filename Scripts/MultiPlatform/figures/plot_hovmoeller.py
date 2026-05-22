@@ -52,8 +52,9 @@ import cmocean
 # USER SETTINGS
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Hovmoeller_Composed"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins_composed.csv")
+OUT_DIR = str(PROJECT_ROOT / "Plots/Hovmoeller_Composed")
 
 # Plot which basins; if None, infer from file
 BASINS_TO_PLOT = None

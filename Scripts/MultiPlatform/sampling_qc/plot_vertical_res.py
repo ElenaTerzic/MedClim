@@ -4,8 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/summary_sampling_instrument_ALL_SOURCES.csv")  # put full path if needed
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/viz_sampling")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+INFILE = Path(str(PROJECT_ROOT / "Stats/Vertical_Sampling/summary_sampling_instrument_ALL_SOURCES.csv"))  # put full path if needed
+OUTDIR = Path(str(PROJECT_ROOT / "Stats/Vertical_Sampling/viz_sampling"))
 OUTDIR.mkdir(exist_ok=True)
 
 SEASONS = ["JFM","AMJ","JAS","OND"]

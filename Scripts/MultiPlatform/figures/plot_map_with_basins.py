@@ -45,7 +45,8 @@ from shapely.prepared import prep
 # OUTPUT / PATHS
 # ==========================================================
 
-OUT_DIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/BasinMaps_MapPlotter")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+OUT_DIR = Path(str(PROJECT_ROOT / "Plots/BasinMaps_MapPlotter"))
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUT_ATOMIC = OUT_DIR / "atomic_manca_basins_satellite_coastmasked.png"

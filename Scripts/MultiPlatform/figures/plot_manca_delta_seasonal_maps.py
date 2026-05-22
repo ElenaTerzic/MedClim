@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import os
 import re
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -36,12 +37,13 @@ from matplotlib.gridspec import GridSpec
 # HARD-CODED INPUTS / OUTPUTS / SETTINGS
 # ==========================================================
 
-CLIM20_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv"
-CLIM21_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+CLIM20_CSV = str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv")
+CLIM21_CSV = str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv")
 
-MANCA_PY   = "/Users/elena/Projects/Basins/Basins/manca.py"
+MANCA_PY   = str(PROJECT_ROOT.parents[1] / "Basins" / "Basins" / "manca.py")
 
-OUTDIR     = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/DeltaMaps"
+OUTDIR     = str(PROJECT_ROOT / "Plots/MultiPlatform/DeltaMaps")
 
 # Variables to plot (one PNG per var)
 VARS = ["T", "S", "SIG0"]

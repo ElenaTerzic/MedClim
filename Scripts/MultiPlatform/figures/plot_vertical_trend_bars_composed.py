@@ -71,8 +71,9 @@ from matplotlib.cm import ScalarMappable
 # USER CONFIG
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends/VerticalProfiles_Composed"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv")
+OUT_DIR = str(PROJECT_ROOT / "Plots/MultiPlatform/Trends/VerticalProfiles_Composed")
 
 DEFAULT_BASINS = [
     "ALB", "WEST", "NWM", "TYR", "SIC",

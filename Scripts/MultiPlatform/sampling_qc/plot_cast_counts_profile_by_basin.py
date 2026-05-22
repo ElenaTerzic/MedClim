@@ -32,6 +32,7 @@ from matplotlib.patches import Patch
 # CONFIG
 # =============================================================================
 
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 PERIODS = {
     "21c_2000_2025": (2000, 2025),
     "20c_1950_1999": (1950, 1999),
@@ -53,7 +54,7 @@ STD_CENTERS = np.array([
 
 PLOT_ZMAX = 2000.0
 
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/CastCounts")
+OUTDIR = Path(str(PROJECT_ROOT / "Plots/MultiPlatform/CastCounts"))
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 CHUNKSIZE = 400_000
@@ -212,7 +213,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv")),
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -225,7 +226,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv")),
         time_col="TIME",
         basin_col="basin",
         depth_col="PRES",
@@ -240,7 +241,7 @@ SOURCES: List[SourceSpec] = [
     # Adriatic local datasets (pooled into "ADRIATIC" at counting time)
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -251,7 +252,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -262,7 +263,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -273,7 +274,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv")),
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -526,7 +527,7 @@ def main():
         print("No data found. Check input paths.")
         return
 
-    out_csv = "/Users/elena/Projects/IRB/MedClim/Stats/cast_counts_bybin_by_platform_season_period_T.csv"
+    out_csv = str(PROJECT_ROOT / "Stats/cast_counts_bybin_by_platform_season_period_T.csv")
     df.to_csv(out_csv, index=False)
     print("Wrote:", out_csv)
 

@@ -6,6 +6,7 @@ from __future__ import annotations
 import os
 import re
 import math
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -21,10 +22,11 @@ from matplotlib.transforms import Bbox
 # HARD-CODED INPUTS / OUTPUTS / SETTINGS
 # ==========================================================
 
-IN_CSV   = "/Users/elena/Projects/IRB/MedClim/Results/Trends/linear_trends_20c_21c_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+IN_CSV   = str(PROJECT_ROOT / "Results/Trends/linear_trends_20c_21c_atomic.csv")
+MANCA_PY = str(PROJECT_ROOT.parents[1] / "Basins" / "Basins" / "manca.py")
 
-OUTDIR   = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends"
+OUTDIR   = str(PROJECT_ROOT / "Plots/MultiPlatform/Trends")
 BASENAME = "LinearTrends_CoastMask"
 
 VARS = ["T", "S", "SIG0"]

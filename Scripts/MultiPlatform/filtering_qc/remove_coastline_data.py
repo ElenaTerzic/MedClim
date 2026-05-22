@@ -117,6 +117,7 @@ NE_URL = "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_land.zip"
 # SOURCE DEFINITIONS
 # ==========================================================
 
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 GOOD_QF_SDN = {1, 2}
 GOOD_QF_ARGO = {1, 2, 5, 8}
 
@@ -146,7 +147,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv")),
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -168,7 +169,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins.csv")),
         time_col="TIME",
         time_format="%Y-%m-%dT%H:%M:%S",
         basin_col="basin",
@@ -188,7 +189,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -203,7 +204,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -218,7 +219,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -233,7 +234,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed.csv")),
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",

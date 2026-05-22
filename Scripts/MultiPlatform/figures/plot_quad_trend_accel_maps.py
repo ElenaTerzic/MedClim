@@ -30,6 +30,7 @@ import os
 import re
 import math
 import argparse
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -43,9 +44,10 @@ from matplotlib.gridspec import GridSpec
 # ==========================================================
 # EMBEDDED CONFIG
 # ==========================================================
-IN_CSV  = "/Users/elena/Projects/IRB/MedClim/Results/Trends/quad_trend_accel_fullperiod_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+IN_CSV  = str(PROJECT_ROOT / "Results/Trends/quad_trend_accel_fullperiod_atomic.csv")
+MANCA_PY = str(PROJECT_ROOT.parents[1] / "Basins" / "Basins" / "manca.py")
+OUT_DIR = str(PROJECT_ROOT / "Plots/MultiPlatform/Trends")
 
 DEPTH_TAGS = ["0-10", "200", "1000", "2000"]
 DPI = 220

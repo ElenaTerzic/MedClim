@@ -71,7 +71,8 @@ from shapely.ops import unary_union
 # USER SETTINGS
 # ==========================================================
 
-OUTPUT_DIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/CoastalExclusionQC")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+OUTPUT_DIR = Path(str(PROJECT_ROOT / "Plots/CoastalExclusionQC"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUT_PANEL = OUTPUT_DIR / "QC_actual_masks_2x3_split_causes.png"
@@ -286,42 +287,42 @@ class DiagSpec:
 DATASETS: List[DiagSpec] = [
     DiagSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="Longitude [degrees_east]",
         lat_col="Latitude [degrees_north]",
         basin_col="basin",
     ),
     DiagSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
         basin_col="basin",
     ),
     DiagSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
         basin_col="BASIN_3ADR_FIXED",
     ),
     DiagSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
         basin_col="BASIN_3ADR_FIXED",
     ),
     DiagSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
         basin_col="BASIN_3ADR_FIXED",
     ),
     DiagSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded_profile_diagnostics.csv"),
+        path=Path(str(PROJECT_ROOT / "Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded_profile_diagnostics.csv")),
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
         basin_col="BASIN_3ADR_FIXED",

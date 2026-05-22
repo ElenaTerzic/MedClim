@@ -27,6 +27,7 @@ Input CSV expected:
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -39,8 +40,9 @@ from scipy import stats
 # SETTINGS (EDIT THESE)
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends/TimeseriesChecks"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+IN_CSV = str(PROJECT_ROOT / "Results/Trends/monthly_timeseries_all_bins.csv")
+OUTDIR = str(PROJECT_ROOT / "Plots/MultiPlatform/Trends/TimeseriesChecks")
 
 DEPTH_TAG  = "0-10"      # "0-10", "200", "300", "1000", "2000"
 SURF_RANGE = (0.0, 10.0)

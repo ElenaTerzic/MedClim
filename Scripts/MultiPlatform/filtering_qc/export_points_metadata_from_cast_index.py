@@ -23,8 +23,9 @@ import numpy as np
 # ==========================================================
 # USER SETTINGS
 # ==========================================================
-ROOT_STATS_DIR = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG"
-OUT_PREFIX     = "/Users/elena/Projects/IRB/MedClim/Stats/points_metadata_all_sources"  # will write _20c.csv and _21c.csv
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+ROOT_STATS_DIR = str(PROJECT_ROOT / "Stats/MultiSource_Climatology_BINNED_ELIG")
+OUT_PREFIX     = str(PROJECT_ROOT / "Stats/points_metadata_all_sources")  # will write _20c.csv and _21c.csv
 
 # Keep only these basins (e.g. ["DJ1","DJ3"]) or None for all
 BASINS_KEEP = None #["DJ1", "DJ3"]

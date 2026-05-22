@@ -24,8 +24,9 @@ import matplotlib.pyplot as plt
 # -------------------
 # EDIT ME
 # -------------------
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/bin_coverage_ALL_SOURCES_STD_CENTERED_varOK.csv")
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/bin_coverage_diagnostics")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+INFILE = Path(str(PROJECT_ROOT / "Stats/Vertical_Sampling/bin_coverage_ALL_SOURCES_STD_CENTERED_varOK.csv"))
+OUTDIR = Path(str(PROJECT_ROOT / "Stats/Vertical_Sampling/bin_coverage_diagnostics"))
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 TAG = "ALL_SOURCES_STD_CENTERED_varOK"
