@@ -457,6 +457,10 @@ def load_climatology(path: str) -> pd.DataFrame:
     out["z_m"] = pd.to_numeric(out["z_m"], errors="coerce")
     for c in ["T_mean", "S_mean", "SIG0_mean"]:
         out[c] = pd.to_numeric(out[c], errors="coerce")
+    # std and count columns (optional) for difference-uncertainty envelopes
+    for c in ["T_std", "S_std", "SIG0_std", "n_T", "n_S", "n_SIG0"]:
+        if c in out.columns:
+            out[c] = pd.to_numeric(out[c], errors="coerce")
     return out
 
 
@@ -475,6 +479,18 @@ def build_profile_delta(clim21: pd.DataFrame, clim20: pd.DataFrame, basin: str) 
     merged["dT"] = merged["T_mean_21"] - merged["T_mean_20"]
     merged["dS"] = merged["S_mean_21"] - merged["S_mean_20"]
     merged["dSIG0"] = merged["SIG0_mean_21"] - merged["SIG0_mean_20"]
+
+    # +-1 sigma climatological spread of the century difference per season,
+    #   sigma = sqrt(std21^2 + std20^2)   (as in Supplement S2-S13);
+    # rendered as a single combined grey envelope across seasons to keep
+    # the narrow panels legible
+    for v, scol in (("dT", "T_std"), ("dS", "S_std"), ("dSIG0", "SIG0_std")):
+        s21, s20 = f"{scol}_21", f"{scol}_20"
+        if s21 in merged.columns and s20 in merged.columns:
+            merged[f"{v}_env"] = np.sqrt(
+                pd.to_numeric(merged[s21], errors="coerce") ** 2 +
+                pd.to_numeric(merged[s20], errors="coerce") ** 2
+            )
 
     merged = merged.sort_values(["season", "z_m"]).copy()
     return merged
@@ -820,14 +836,37 @@ def plot_profile_block(
 
     axT.set_title(f"{basin}", pad=1)
 
+    # single combined climatological envelope across seasons (grey), behind
+    # the lines: per depth, the union of the seasonal (delta - sigma, delta + sigma)
+    # bands with sigma = sqrt(std21^2 + std20^2), as in Supplement S2-S13
+    for ax_, v in ((axT, "dT"), (axS, "dS"), (axD, "dSIG0")):
+        scol = f"{v}_env"
+        if scol not in delta_df.columns:
+            continue
+        dd = delta_df[["season", "z_m", v, scol]].copy()
+        dd[v] = pd.to_numeric(dd[v], errors="coerce")
+        dd[scol] = pd.to_numeric(dd[scol], errors="coerce")
+        dd = dd[np.isfinite(dd["z_m"]) & np.isfinite(dd[v]) & np.isfinite(dd[scol])]
+        if dd.empty:
+            continue
+        dd["lo"] = dd[v] - dd[scol]
+        dd["hi"] = dd[v] + dd[scol]
+        band = dd.groupby("z_m").agg(lo=("lo", "min"), hi=("hi", "max")).sort_index()
+        ax_.fill_betweenx(
+            band.index.to_numpy(float),
+            band["lo"].to_numpy(float),
+            band["hi"].to_numpy(float),
+            color="0.55", alpha=0.22, linewidth=0, zorder=1
+        )
+
     for season in SEASON_ORDER:
         d = delta_df[delta_df["season"] == season].sort_values("z_m")
         if d.empty:
             continue
         c = SEASON_COLOR[season]
-        axT.plot(d["dT"], d["z_m"], color=c, lw=1.8, label=SEASON_LABEL[season])
-        axS.plot(d["dS"], d["z_m"], color=c, lw=1.8)
-        axD.plot(d["dSIG0"], d["z_m"], color=c, lw=1.8)
+        axT.plot(d["dT"], d["z_m"], color=c, lw=2.0, label=SEASON_LABEL[season], zorder=3)
+        axS.plot(d["dS"], d["z_m"], color=c, lw=2.0, zorder=3)
+        axD.plot(d["dSIG0"], d["z_m"], color=c, lw=2.0, zorder=3)
 
     axT.set_xlabel("ΔT [°C]")
     axS.set_xlabel("ΔS [-]")
@@ -846,9 +885,9 @@ def plot_profile_block(
     axS.xaxis.set_major_formatter(FormatStrFormatter("%.2f"))
     axD.xaxis.set_major_formatter(FormatStrFormatter("%.2f"))
 
-    axT.tick_params(axis="x", labelsize=8.5, pad=1)
-    axS.tick_params(axis="x", labelsize=8.5, pad=1)
-    axD.tick_params(axis="x", labelsize=8.5, pad=1)
+    axT.tick_params(axis="x", labelsize=9.5, pad=1)
+    axS.tick_params(axis="x", labelsize=9.5, pad=1)
+    axD.tick_params(axis="x", labelsize=9.5, pad=1)
 
     if show_ylabel:
         axT.set_ylabel("Depth [m]")
@@ -1024,12 +1063,12 @@ def main():
     df_ts = load_ts_dataframe()
 
     print("[INFO] Creating figure")
-    fig = plt.figure(figsize=(18.4, 11.0), facecolor=FIG_FACE)
+    fig = plt.figure(figsize=(18.4, 12.2), facecolor=FIG_FACE)
     gs = GridSpec(
         3, 3, figure=fig,
-        height_ratios=[0.96, 0.92, 1.12],
+        height_ratios=[0.88, 1.14, 1.08],
         width_ratios=[1.00, 1.00, 1.00],
-        hspace=0.26, wspace=0.22
+        hspace=0.30, wspace=0.22
     )
     # ---------------- top row: maps ----------------
     if HAVE_CARTOPY:
@@ -1046,6 +1085,7 @@ def main():
     #plot_delta_map(ax_c, basin_polys, delta_D, DEPTH_TAG_MAP, DELTA_SIG0_LIM, "Δσ₀ @ 200 m", "c")
     plot_delta_map(ax_c, basin_polys, delta_D, DEPTH_TAG_MAP, DELTA_SIG0_LIM, "ΔPDA @ 200 m", "c")
 
+    cb_axes = []
     for ax, lim, unit, ticks in [
         (ax_a, DELTA_T_LIM, "ΔT [°C]", np.arange(-0.8, 0.81, 0.2)),
         (ax_b, DELTA_S_LIM, "ΔS [-]", np.arange(-0.20, 0.201, 0.05)),
@@ -1057,6 +1097,7 @@ def main():
         cb = plt.colorbar(sm, cax=cax, orientation="horizontal", ticks=ticks)
         cb.set_label(unit, fontsize=10)
         cb.ax.tick_params(labelsize=9, pad=2)
+        cb_axes.append(cax)
 
     # ---------------- middle row: profiles ----------------
     profile_axes = []
@@ -1077,15 +1118,32 @@ def main():
 
     handles = [Line2D([0], [0], color=SEASON_COLOR[s], lw=2.5, label=SEASON_LABEL[s]) for s in SEASON_ORDER]
 
+    # center the season legend in the free gap between the map colorbars
+    # (including their labels) and the profile-row basin titles, using
+    # rendered extents to avoid crowding
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    inv = fig.transFigure.inverted()
+
+    cb_bottom = min(
+        inv.transform(cax.get_tightbbox(renderer)).min(axis=0)[1]
+        for cax in cb_axes
+    )
+    prof_top = max(
+        inv.transform(ax.get_tightbbox(renderer)).max(axis=0)[1]
+        for block in profile_axes for ax in block
+    )
+    legend_y = 0.5 * (cb_bottom + prof_top)
+
     fig.legend(
         handles=handles,
-        loc="upper center",
-        bbox_to_anchor=(0.5, 0.65),
+        loc="center",
+        bbox_to_anchor=(0.5, legend_y),
         ncol=4,
         frameon=False,
-        fontsize=10,
-        handlelength=2.5,
-        columnspacing=1.5
+        fontsize=11,
+        handlelength=2.6,
+        columnspacing=2.2
     )
 
     # ---------------- bottom row: T-S ----------------
