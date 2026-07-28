@@ -33,6 +33,9 @@ Data/
 # Large CSV / diagnostics
 *.csv
 
+# Zenodo staging
+Zenodo_staging/
+
 # Seadatanet diagnostics
 Diagnostics/
 Scripts/Seadatanet/outputs/
