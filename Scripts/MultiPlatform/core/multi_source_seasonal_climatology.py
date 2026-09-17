@@ -62,6 +62,10 @@ import pandas as pd
 PERIODS = {
     "20c_1950_1999": (1950, 1999),
     "21c_2000_2025": (2000, 2025), #before I had 2019 for AA
+    # Restored for the Ocean Science revision: the OS manuscript states
+    # 2000-2019 for Figs 1-2 and its Section 2, so the climatologies behind
+    # the revised figures and the steric recalculation have to match that.
+    "21c_2000_2019": (2000, 2019),
 }
 
 OUTDIR_BASE = Path("/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG")
