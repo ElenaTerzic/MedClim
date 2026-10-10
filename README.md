@@ -22,14 +22,21 @@ excluded from version control.
    Adriatic datasets deposited in the accompanying Zenodo data record.
 4. `Scripts/MultiPlatform/filtering_qc/remove_coastline_data.py` applies the coastal and
    estuarine exclusion masks used before pooled analysis.
-5. `Scripts/MultiPlatform/core/multi_source_seasonal_climatology.py` builds the seasonal
+5. `Scripts/Seadatanet/preprocessing/identify_argo_copies_in_seadatanet.py` lists the
+   SeaDataNet casts that are Argo float profiles already held by the Argo set (the
+   SeaDataNet aggregation archives float cycles as casts of its own), and
+   `Scripts/Seadatanet/preprocessing/remove_argo_copies_from_seadatanet.py` writes the
+   SeaDataNet master file without them (`*_no_argo_copies.csv`), which every downstream
+   script reads. The list of the 21,926 affected casts is tracked as
+   `Scripts/Seadatanet/preprocessing/sdn_argo_copies_pids.txt`. See `CHANGELOG.md`.
+6. `Scripts/MultiPlatform/core/multi_source_seasonal_climatology.py` builds the seasonal
    climatology products.
-6. `Scripts/MultiPlatform/core/build_monthly_timeseries_all_bins.py` and
+7. `Scripts/MultiPlatform/core/build_monthly_timeseries_all_bins.py` and
    `Scripts/MultiPlatform/core/build_monthly_timeseries_composed_from_atomic.py` create
    monthly basin-by-depth series.
-7. `Scripts/MultiPlatform/core/fit_trends_all_bins.py` fits the linear and quadratic trend
+8. `Scripts/MultiPlatform/core/fit_trends_all_bins.py` fits the linear and quadratic trend
    products used in the manuscript.
-8. `Scripts/MultiPlatform/core/save_metadata.py` rebuilds map-support metadata tables.
+9. `Scripts/MultiPlatform/core/save_metadata.py` rebuilds map-support metadata tables.
 
 ## Manuscript figures
 

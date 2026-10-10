@@ -28,10 +28,24 @@ This directory contains the SeaDataNet-only workflow used in the MedClim project
 5. `preprocessing/seadatanet_assign_manca_basins.py`  
    Assign Manca basins and export basin-tagged CSV files.
 
-6. `climatology/manca_seasonal_climatology_TS.py`  
+6. `preprocessing/identify_argo_copies_in_seadatanet.py`  
+   After the coastal mask (`MultiPlatform/filtering_qc/remove_coastline_data.py`) and the
+   Argo preprocessing: list the SeaDataNet casts that are Argo float profiles already held
+   by the Argo set (SeaDataNet archives float cycles as casts under cruises `PF_<WMO>`,
+   `Argo <WMO>`, `ARGO-ITALY …`, a few as "CTD" under `SHODB`). Matching by float id and
+   cycle, by time and position, and by identical binned temperatures. Writes
+   `Data/Seadatanet/sdn_argo_copies.csv` and the tracked `preprocessing/sdn_argo_copies_pids.txt`
+   (21,926 casts, 2005–2019).
+
+7. `preprocessing/remove_argo_copies_from_seadatanet.py`  
+   Write the SeaDataNet master file (and its per-cast diagnostics file) without the listed
+   casts: `*_no_argo_copies.csv`. All downstream MultiPlatform / Publication_Papers scripts
+   read these files.
+
+8. `climatology/manca_seasonal_climatology_TS.py`  
    Build seasonal climatologies by basin.
 
-7. `figures/plot_manca_like_profiles_per_basin.py`  
+9. `figures/plot_manca_like_profiles_per_basin.py`  
    Plot seasonal climatological profiles.
 
 ## Additional diagnostics

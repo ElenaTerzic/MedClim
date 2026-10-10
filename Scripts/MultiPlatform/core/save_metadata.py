@@ -109,7 +109,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"),
+        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"),
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",

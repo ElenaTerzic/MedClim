@@ -95,7 +95,7 @@ except ImportError as e:
 # ----------------------------
 # Map point files
 # ----------------------------
-SDN_MAP_CSV = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv"
+SDN_MAP_CSV = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies_profile_diagnostics.csv"
 ARGO_MAP_CSV = "/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded_profile_diagnostics.csv"
 
 ADRIATIC_MAP_CSVS = [
@@ -344,7 +344,7 @@ from collections import defaultdict
 
 # ---- Files for temporal counts ----
 # Use the files whose schema is appropriate for cast counting.
-SDN_COUNT_FILE = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only.csv"
+SDN_COUNT_FILE = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"
 ARGO_COUNT_FILE = "/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"
 
 ADRIATIC_COUNT_FILES = [
