@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins[_composed].csv (--mode)
+# Writes: Results/Trends/Robustness/PeriodSensitivity_<mode>/robustness_period_sensitivity_{accel_profiles.png,accel_profiles.pdf,<mode>.csv}
 
 """
 robustness_period_sensitivity_two_step.py
@@ -31,11 +33,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import RESULTS
+
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends"
+BASE_DIR = str(RESULTS / "Trends")
 
 PATHS = {
     "atomic": {

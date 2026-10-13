@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Argo/Chunks/argo_med_phy*.nc
+# Writes: Data/Argo/Merged/argo_med_merged_raw.nc, Data/Argo/Merged/merge_report.csv
 """
 merge_med_chunks.py
 --------------------
@@ -22,9 +24,14 @@ import pandas as pd
 import xarray as xr
 import numpy as np
 
-PROJECT_ROOT = "/Users/elena/Projects/IRB/MedClim"
-CHUNK_DIR    = os.path.join(PROJECT_ROOT, "Data/Argo/Chunks")
-OUTDIR       = os.path.join(PROJECT_ROOT, "Data/Argo/Merged")
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
+CHUNK_DIR    = str(DATA / "Argo" / "Chunks")
+OUTDIR       = str(DATA / "Argo" / "Merged")
 os.makedirs(OUTDIR, exist_ok=True)
 
 OUT_NC   = os.path.join(OUTDIR, "argo_med_merged_raw.nc")

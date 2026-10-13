@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv
+# Writes: Plots/MultiPlatform/Trends/VerticalProfiles_Composed/<basin>_vertical_trend_accel_bars.png
 
 """
 plot_vertical_trend_bars_composed.py
@@ -66,13 +68,18 @@ from matplotlib.patches import Rectangle
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS
+
 
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends/VerticalProfiles_Composed"
+IN_CSV = str(RESULTS / "Trends" / "Composed" / "quad_trend_accel_fullperiod_composed.csv")
+OUT_DIR = str(PLOTS / "MultiPlatform" / "Trends" / "VerticalProfiles_Composed")
 
 DEFAULT_BASINS = [
     "ALB", "WEST", "NWM", "TYR", "SIC",

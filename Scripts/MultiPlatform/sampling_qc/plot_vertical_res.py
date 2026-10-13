@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
+# Reads : Stats/Vertical_Sampling/summary_sampling_instrument_ALL_SOURCES.csv
+# Writes: Stats/Vertical_Sampling/viz_sampling/*.png
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/summary_sampling_instrument_ALL_SOURCES.csv")  # put full path if needed
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/viz_sampling")
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import STATS
+
+INFILE = STATS / "Vertical_Sampling" / "summary_sampling_instrument_ALL_SOURCES.csv"  # put full path if needed
+OUTDIR = STATS / "Vertical_Sampling" / "viz_sampling"
 OUTDIR.mkdir(exist_ok=True)
 
 SEASONS = ["JFM","AMJ","JAS","OND"]

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Stats/MultiSource_Climatology_BINNED_ELIG/*/POOLED_RAW/climatology_POOLED_RAW_*_after_sigma.csv, Stats/cast_counts_bybin_by_platform_season_period_T.csv, Stats/points_metadata_all_sources_ALL_*.csv
+# Writes: Plots/MultiPlatform/AllBasins_Publication/<mode>/<basin>_<mode>_publication_3row_PDA_maps_support.png
 """
 plot_manca_all_basins_publication_SIG0_maps_support.py
 
@@ -36,6 +38,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import STATS, PLOTS
+
 try:
     import cartopy.crs as ccrs
     import cartopy.feature as cfeature
@@ -49,22 +56,22 @@ except Exception:
 # =========================
 
 # --- CLIMATOLOGY CSVs (atomic) ---
-CLIM_21C_ATOMIC_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv"
-CLIM_20C_ATOMIC_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv"
+CLIM_21C_ATOMIC_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "21c_2000_2025" / "POOLED_RAW" / "climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv")
+CLIM_20C_ATOMIC_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "20c_1950_1999" / "POOLED_RAW" / "climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv")
 
 # --- CLIMATOLOGY CSVs (composed) ---
-CLIM_21C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv"
-CLIM_20C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv"
+CLIM_21C_COMPOSED_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "21c_2000_2025" / "POOLED_RAW" / "climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv")
+CLIM_20C_COMPOSED_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "20c_1950_1999" / "POOLED_RAW" / "climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv")
 
 # --- SUPPORT COUNTS ---
-COUNTS_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/cast_counts_bybin_by_platform_season_period_T.csv"
+COUNTS_CSV = str(STATS / "cast_counts_bybin_by_platform_season_period_T.csv")
 
 # --- POINTS METADATA (for maps) ---
-POINTS_META_ATOMIC_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/points_metadata_all_sources_ALL_atomic.csv"
-POINTS_META_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/points_metadata_all_sources_ALL_composed.csv"
+POINTS_META_ATOMIC_CSV = str(STATS / "points_metadata_all_sources_ALL_atomic.csv")
+POINTS_META_COMPOSED_CSV = str(STATS / "points_metadata_all_sources_ALL_composed.csv")
 
 # --- OUTPUT ---
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/AllBasins_Publication"
+OUTDIR = str(PLOTS / "MultiPlatform" / "AllBasins_Publication")
 
 # Plotting-only sanity masks / overrides
 SALINITY_PLOT_RANGE = (30.0, 40.5)  # [psu]

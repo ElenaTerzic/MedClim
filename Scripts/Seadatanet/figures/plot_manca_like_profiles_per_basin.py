@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/climatology_sdn_{20c_1950_1999,21c_2000_2019}_after_1sigma.csv
+# Writes: Plots/Seadatanet/Seasonal_Profiles_Per_Basin/<period>/<basin>_seasonal_profiles_TS_<tag>.png
 
 from pathlib import Path
 import numpy as np
@@ -7,21 +9,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # -----------------------------
 # INPUTS (BOTH PERIODS)
 # -----------------------------
 INPUTS = [
     (
         "20c_1950_1999",
-        Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/climatology_sdn_20c_1950_1999_after_1sigma.csv"),
+        DATA / "Seadatanet" / "climatology_sdn_20c_1950_1999_after_1sigma.csv",
     ),
     (
         "21c_2000_2019",
-        Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/climatology_sdn_21c_2000_2019_after_1sigma.csv"),
+        DATA / "Seadatanet" / "climatology_sdn_21c_2000_2019_after_1sigma.csv",
     ),
 ]
 
-OUTBASE = Path("/Users/elena/Projects/IRB/MedClim/Plots/Seadatanet") / "Seasonal_Profiles_Per_Basin"
+OUTBASE = PLOTS / "Seadatanet" / "Seasonal_Profiles_Per_Basin"
 OUTBASE.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------

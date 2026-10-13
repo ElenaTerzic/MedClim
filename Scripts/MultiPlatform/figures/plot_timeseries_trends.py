@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins.csv
+# Writes: Plots/MultiPlatform/Trends/TimeseriesChecks/TScheck_cosfit_<basin>_<depth>.png
 
 """
 Per-basin diagnostic plots for trend sanity-checking using the SAME seasonal removal
@@ -34,13 +36,19 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from scipy import stats
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS
+
 
 # ==========================================================
 # SETTINGS (EDIT THESE)
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends/TimeseriesChecks"
+IN_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins.csv")
+OUTDIR = str(PLOTS / "MultiPlatform" / "Trends" / "TimeseriesChecks")
 
 DEPTH_TAG  = "0-10"      # "0-10", "200", "300", "1000", "2000"
 SURF_RANGE = (0.0, 10.0)

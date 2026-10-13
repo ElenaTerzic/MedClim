@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
+# Reads : Data/Seadatanet/Seadatanet.profiles_only.csv
+# Writes: Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv
 import os
 import numpy as np
 import pandas as pd
 import Basins
+
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
 LON_COL   = "Longitude [degrees_east]"
 LAT_COL   = "Latitude [degrees_north]"
@@ -77,6 +85,6 @@ def add_basins_chunked(input_csv: str, out_csv: str, chunksize: int = 300_000) -
     print(f"Wrote: {out_csv}")
 
 if __name__ == "__main__":
-    INFILE = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only.csv"
-    OUTFILE = "/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv"
+    INFILE = str(DATA / "Seadatanet" / "Seadatanet.profiles_only.csv")
+    OUTFILE = str(DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins.csv")
     add_basins_chunked(INFILE, OUTFILE, chunksize=300_000)

@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code, please cite the software through its Zenodo concept DOI
+  (10.5281/zenodo.20410480, which resolves to the latest archived version) and the
+  article it was written for (preferred-citation below).
+type: software
+title: MedClim analysis code for Mediterranean thermohaline acceleration analysis
+abstract: >-
+  Mediterranean hydrographic processing and analysis workflows: preprocessing of
+  SeaDataNet, Argo and regional Adriatic observations, basin-based seasonal
+  climatologies and monthly series by standard-depth bin, linear and quadratic trend
+  fits, and the manuscript figures of Terzić and Vilibić (Geophysical Research Letters,
+  2026).
+authors:
+  - family-names: Terzić
+    given-names: Elena
+    affiliation: Ruđer Bošković Institute
+    orcid: https://orcid.org/0000-0002-9335-6174
+  - family-names: Vilibić
+    given-names: Ivica
+    affiliation: Ruđer Bošković Institute
+    orcid: https://orcid.org/0000-0002-0753-5775
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20410480
+    description: Zenodo concept DOI (all versions)
+  - type: doi
+    value: 10.5281/zenodo.20410481
+    description: Zenodo version 1.0 (12 August 2026), the code behind the published GRL figures
+repository-code: https://github.com/ElenaTerzic/MedClim
+license: CC-BY-4.0
+keywords:
+  - Mediterranean Sea
+  - ocean warming
+  - salinification
+  - thermohaline change
+  - ocean acceleration
+  - Argo
+  - SeaDataNet
+  - analysis code
+  - climate change
+  - oceanography
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Terzić
+      given-names: Elena
+      orcid: https://orcid.org/0000-0002-9335-6174
+    - family-names: Vilibić
+      given-names: Ivica
+      orcid: https://orcid.org/0000-0002-0753-5775
+  title: Observational evidence for accelerated warming and salinification propagating into the deep Mediterranean
+  journal: Geophysical Research Letters
+  year: 2026
+  doi: 10.1029/2026GL124518

@@ -60,6 +60,6 @@ This directory contains the SeaDataNet-only workflow used in the MedClim project
 
 ## Notes
 
-- Scripts currently use local hard-coded paths.
+- Paths are resolved through `Scripts/paths.py` (see the repository README).
 - Large generated CSV diagnostics should not be tracked in Git.
 - Data files are stored outside the repository.

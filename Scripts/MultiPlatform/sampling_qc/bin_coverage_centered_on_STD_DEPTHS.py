@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv
+# Writes: Stats/Vertical_Sampling/{bin_coverage,flags_bins,max_depth_ok}_<TAG>_varOK.csv, coverage_fraction_<TAG>_varOK.png
 
 """
 STD-centered bin coverage diagnostics with VARIABLE-SPECIFIC OK bins (T vs S).
@@ -34,13 +36,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, STATS
+
 
 # =============================================================================
 # CONFIG
 # =============================================================================
 
 TAG = "ALL_SOURCES_STD_CENTERED"
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling")
+OUTDIR = STATS / "Vertical_Sampling"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 CHUNKSIZE = 400_000
@@ -133,7 +140,7 @@ GOOD_QF_ARGO = {"1", "2"}
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"),
+        path=DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv",
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -147,7 +154,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"),
+        path=DATA / "Argo" / "CSV" / "Argo_with_basins_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="basin",
         depth_col="PRES",   # dbar ~ meters (good enough for bin coverage)
@@ -161,7 +168,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR",
         depth_col="DEPTH_M",
@@ -172,7 +179,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR",
         depth_col="DEPTH_M",
@@ -183,7 +190,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR",
         depth_col="DEPTH_M",
@@ -194,7 +201,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR",
         depth_col="DEPTH_M",

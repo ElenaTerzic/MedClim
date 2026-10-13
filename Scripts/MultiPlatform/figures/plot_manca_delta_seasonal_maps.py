@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Stats/MultiSource_Climatology_BINNED_ELIG/*/POOLED_RAW/climatology_POOLED_RAW_*_atomic_after_sigma.csv; Basins/manca.py
+# Writes: Plots/MultiPlatform/DeltaMaps/DeltaMaps_polygons_<var>_21c-20c_0-10_200_1000_2000.png
 
 """
 Hardcoded version (no CLI args):
@@ -31,17 +33,22 @@ import cartopy.feature as cfeature
 from shapely.geometry import Polygon
 from matplotlib.gridspec import GridSpec
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import STATS, PLOTS, MANCA_PY
+
 
 # ==========================================================
 # HARD-CODED INPUTS / OUTPUTS / SETTINGS
 # ==========================================================
 
-CLIM20_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv"
-CLIM21_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv"
+CLIM20_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "20c_1950_1999" / "POOLED_RAW" / "climatology_POOLED_RAW_20c_1950_1999_atomic_after_sigma.csv")
+CLIM21_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "21c_2000_2025" / "POOLED_RAW" / "climatology_POOLED_RAW_21c_2000_2025_atomic_after_sigma.csv")
 
-MANCA_PY   = "/Users/elena/Projects/Basins/Basins/manca.py"
 
-OUTDIR     = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/DeltaMaps"
+OUTDIR     = str(PLOTS / "MultiPlatform" / "DeltaMaps")
 
 # Variables to plot (one PNG per var)
 VARS = ["T", "S", "SIG0"]

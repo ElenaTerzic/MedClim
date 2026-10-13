@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Argo GDAC via argopy (network)
+# Writes: Data/Argo/Chunks/argo_med_phy_<yyyymm>_R<region>_lon*_lat*.nc, download_log.csv, download_failures.csv
 """
 Safer Med Argo downloader using argopy ds="phy".
 
@@ -21,9 +23,14 @@ from argopy import DataFetcher
 import argopy
 import traceback
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
 # --------------------- CONFIG ------------------------
 
-OUT_DIR = Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/Chunks")
+OUT_DIR = DATA / "Argo" / "Chunks"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 LOG_FILE  = OUT_DIR / "download_log.csv"

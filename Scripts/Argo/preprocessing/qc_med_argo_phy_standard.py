@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Argo/Merged/argo_med_merged_raw.nc
+# Writes: Data/Argo/Merged/argo_med_merged_qc.nc
 """
 Minimal QC for merged Mediterranean Argo dataset (ds='phy', mode='standard').
 
@@ -20,19 +22,17 @@ import numpy as np
 import xarray as xr
 import argopy  # registers the .argo accessor on xarray objects
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
 # ================== USER SETTINGS ==================
 
-PROJECT_ROOT = "/Users/elena/Projects/IRB/MedClim"
+IN_FILE = str(DATA / "Argo" / "Merged" / "argo_med_merged_raw.nc")
 
-IN_FILE = os.path.join(
-    PROJECT_ROOT,
-    "Data/Argo/Merged/argo_med_merged_raw.nc",  
-) 
-
-OUT_FILE = os.path.join(
-    PROJECT_ROOT,
-    "Data/Argo/Merged/argo_med_merged_qc.nc",  
-)
+OUT_FILE = str(DATA / "Argo" / "Merged" / "argo_med_merged_qc.nc")
 
 POINT_DIM = "N_POINTS"
 

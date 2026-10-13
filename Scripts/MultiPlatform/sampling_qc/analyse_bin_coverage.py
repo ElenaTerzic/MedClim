@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Stats/Vertical_Sampling/bin_coverage_ALL_SOURCES_STD_CENTERED_varOK.csv
+# Writes: Stats/Vertical_Sampling/bin_coverage_diagnostics/{flags_bins,max_depth_ok}_<TAG>_analysed.csv, coverage_fraction_<TAG>_analysed.png
 
 """
 Analyze STD-centered bin coverage and decide which bins are adequately supported.
@@ -21,11 +23,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import STATS
+
 # -------------------
 # EDIT ME
 # -------------------
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/bin_coverage_ALL_SOURCES_STD_CENTERED_varOK.csv")
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Stats/Vertical_Sampling/bin_coverage_diagnostics")
+INFILE = STATS / "Vertical_Sampling" / "bin_coverage_ALL_SOURCES_STD_CENTERED_varOK.csv"
+OUTDIR = STATS / "Vertical_Sampling" / "bin_coverage_diagnostics"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 TAG = "ALL_SOURCES_STD_CENTERED_varOK"

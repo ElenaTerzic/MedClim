@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Stats/MultiSource_Climatology_BINNED_ELIG/**/cast_index_*.csv
+# Writes: Stats/points_metadata_all_sources_{20c,21c,ALL}.csv
 
 """
 Merge cast_index_*.csv files into mapping-ready points tables.
@@ -20,11 +22,16 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import STATS
+
 # ==========================================================
 # USER SETTINGS
 # ==========================================================
-ROOT_STATS_DIR = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG"
-OUT_PREFIX     = "/Users/elena/Projects/IRB/MedClim/Stats/points_metadata_all_sources"  # will write _20c.csv and _21c.csv
+ROOT_STATS_DIR = str(STATS / "MultiSource_Climatology_BINNED_ELIG")
+OUT_PREFIX     = str(STATS / "points_metadata_all_sources")  # will write _20c.csv and _21c.csv
 
 # Keep only these basins (e.g. ["DJ1","DJ3"]) or None for all
 BASINS_KEEP = None #["DJ1", "DJ3"]

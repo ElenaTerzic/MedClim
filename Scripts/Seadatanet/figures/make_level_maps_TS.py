@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/Seadatanet.clean.csv
+# Writes: Plots/Seadatanet/Plots_Level_Maps/*_level_<z>m.csv, maps_{temperature,salinity}_levels.png
 
 import math
 from pathlib import Path
@@ -9,11 +11,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # -----------------------------
 # INPUT / OUTPUT
 # -----------------------------
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.clean.csv")
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/Seadatanet") / "Plots_Level_Maps"
+INFILE = DATA / "Seadatanet" / "Seadatanet.clean.csv"
+OUTDIR = PLOTS / "Seadatanet" / "Plots_Level_Maps"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------

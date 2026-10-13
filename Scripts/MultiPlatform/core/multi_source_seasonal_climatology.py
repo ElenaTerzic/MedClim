@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv
+# Writes: Stats/MultiSource_Climatology_BINNED_ELIG/<period>/{per_source,POOLED_RAW}/climatology_*.csv, cast_index_*.csv
 
 """
 Multi-source seasonal climatology builder (2-pass Manca-style), using
@@ -54,6 +56,11 @@ except Exception:
     HAS_GSW = False
 import pandas as pd
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, STATS
+
 
 # =============================================================================
 # CONFIG YOU EDIT
@@ -68,7 +75,7 @@ PERIODS = {
     "21c_2000_2019": (2000, 2019),
 }
 
-OUTDIR_BASE = Path("/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG")
+OUTDIR_BASE = STATS / "MultiSource_Climatology_BINNED_ELIG"
 
 SAVE_FILES = True
 SAVE_PER_SOURCE = True
@@ -271,7 +278,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"),
+        path=DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv",
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -293,7 +300,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"),
+        path=DATA / "Argo" / "CSV" / "Argo_with_basins_mainland_special_excluded.csv",
         time_col="TIME",
         time_format="%Y-%m-%dT%H:%M:%S",
         basin_col="basin",
@@ -314,7 +321,7 @@ SOURCES: List[SourceSpec] = [
     # --- Adriatic local datasets (fixed) ---
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -329,7 +336,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -344,7 +351,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -359,7 +366,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",

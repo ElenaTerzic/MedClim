@@ -73,6 +73,6 @@ Examples:
 
 ## Notes
 
-- Most scripts currently use hard-coded local paths and may need path refactoring before public release.
+- Paths are resolved through `Scripts/paths.py` (see the repository README).
 - Several outputs are generated into project-level `Plots/`, `Results/`, `Stats/`, and `Diagnostics/` directories.
 - Before publishing, deprecated scripts, temporary outputs, and `__pycache__` should be removed or ignored.

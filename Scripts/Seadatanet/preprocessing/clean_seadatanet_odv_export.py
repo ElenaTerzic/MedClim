@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/Seadatanet.csv (ODV export)
+# Writes: Data/Seadatanet/Seadatanet.clean.csv, Seadatanet.profiles_only.csv, Seadatanet.clean_issues.txt
 
 import csv
 from pathlib import Path
 from collections import defaultdict
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
 # --------------------
 # EDIT PATHS
 # --------------------
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.csv")
+INFILE = DATA / "Seadatanet" / "Seadatanet.csv"
 
 OUT_CLEAN  = INFILE.with_suffix(".clean.csv")
 OUT_MINI   = INFILE.with_suffix(".profiles_only.csv")

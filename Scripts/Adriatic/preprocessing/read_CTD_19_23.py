@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Adriatic/CTD_data_HR_2019_2023_MFSD.xlsx
+# Writes: Plots/Adriatic/CTD_HR_MFSD/CTD_HR_2019_2023_MFSD_long.csv and diagnostic figures
 """
 Basic exploration of Adriatic CTD data from XLSX source.
 
@@ -17,13 +19,16 @@ import MapPlotter as mp
 
 import Basins
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # --------------------------------------------------
 # INPUT
 # --------------------------------------------------
-XLSX_FILE = Path(
-    "/Users/elena/Projects/IRB/MedClim/Data/Adriatic/CTD_data_HR_2019_2023_MFSD.xlsx"
-)
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/Adriatic/CTD_HR_MFSD")
+XLSX_FILE = DATA / "Adriatic" / "CTD_data_HR_2019_2023_MFSD.xlsx"
+OUTDIR = PLOTS / "Adriatic" / "CTD_HR_MFSD"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 OUT_CSV = OUTDIR / "CTD_HR_2019_2023_MFSD_long.csv"
 

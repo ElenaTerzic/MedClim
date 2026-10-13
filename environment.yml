@@ -1,0 +1,42 @@
+# Conda environment for the MedClim pipeline (Terzić & Vilibić, GRL 2026).
+#
+# Versions are the ones installed on the Mac the manuscript products were made with
+# (python.org CPython 3.11.9 with pip-installed packages, October 2026); conda-forge
+# builds of the same versions are expected to behave identically.  netCDF4 was
+# 1.7.1.post1 on that machine.
+#
+#   conda env create -f environment.yml
+#   conda activate medclim
+#
+# Two packages come from GitHub (see the pip section).  Basins is Elena Terzić's extension
+# of Arnau Miró's Basins package (the PyPI release 1.6.6 predates the Manca basins used
+# here, so the pinned GitHub commit of github.com/ElenaTerzic/Basins is required; it
+# builds a Cython extension and needs a C compiler).  MapPlotter is Arnau Miró's
+# satellite-basemap plotter (also on PyPI; the pinned commit is the version the figures
+# were made with).  Versions used: Basins 1.6.7 (commit 2654e95), MapPlotter 2.1.0
+# (commit a904de9).
+name: medclim
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11.9
+  - numpy=1.26.4
+  - pandas=2.2.3
+  - scipy=1.14.0
+  - matplotlib=3.9.1
+  - xarray=2024.2.0
+  - netcdf4=1.7.1
+  - shapely=2.1.2
+  - pyproj=3.6.1
+  - geopandas=1.1.2
+  - cartopy=0.23.0
+  - gsw=3.6.19
+  - cmocean=4.0.3
+  - argopy=1.0.0
+  - openpyxl=3.1.5        # pandas.read_excel in Scripts/Adriatic/preprocessing/read_CTD_19_23.py
+  - pyarrow=23.0.1        # parquet cache in Scripts/MultiPlatform/figures/plot_T_S_diagrams.py
+  - pip
+  - pip:
+      - git+https://github.com/ElenaTerzic/Basins.git@2654e95
+      - git+https://github.com/ArnauMiro/MapPlotter.git@a904de9

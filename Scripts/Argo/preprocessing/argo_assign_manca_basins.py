@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Reads : Data/Argo/Merged/argo_med_all_sorted.csv
+# Writes: Data/Argo/Basins/Argo_with_basins_<basin>.csv, Data/Argo/CSV/Argo_with_basins.csv
 
 # Divide the data set in regions - use the original .csv, saved with nc_to_csv_all.py
 
@@ -9,12 +11,17 @@ import numpy as np
 
 import Basins
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
 def filter_rows_by_values(df, col, values):
 	return df[~df[col].isin(values)]
 
 
-INPUTDIR     = "/Users/elena/Projects/IRB/MedClim/Data/Argo/Merged/"
-OUTDIR       = "/Users/elena/Projects/IRB/MedClim/Data/Argo/Basins/"
+INPUTDIR     = str(DATA / "Argo" / "Merged")
+OUTDIR       = str(DATA / "Argo" / "Basins")
 
 df        = pd.read_csv(os.path.join(INPUTDIR, 'argo_med_all_sorted.csv'))
 

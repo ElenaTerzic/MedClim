@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Argo/CSV/Argo_with_basins.csv
+# Writes: Data/Argo/CSV/argo_manca_like_TS_pass1.csv, argo_manca_like_TS_after_1sigma.csv
 """
 Compute seasonal (JFM/AMJ/JAS/OND) temperature & salinity climatological profiles per basin
 from an Argo "points" CSV (one row per measurement level), in the same Manca-style workflow
@@ -16,6 +18,11 @@ import argparse
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
 # -----------------------------
 # INPUT COLUMNS (Argo export)
@@ -362,9 +369,9 @@ def dump_csv(accT, accS, out_csv):
     return out
 
 def main():
-    infile = Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins.csv")
-    out1   = Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/argo_manca_like_TS_pass1.csv")
-    out2   = Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/argo_manca_like_TS_after_1sigma.csv")
+    infile = DATA / "Argo" / "CSV" / "Argo_with_basins.csv"
+    out1   = DATA / "Argo" / "CSV" / "argo_manca_like_TS_pass1.csv"
+    out2   = DATA / "Argo" / "CSV" / "argo_manca_like_TS_after_1sigma.csv"
 
     year_min  = 2000
     year_max  = 2026

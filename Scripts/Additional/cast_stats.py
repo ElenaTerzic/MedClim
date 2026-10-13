@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Stats/cast_counts_bybin_by_platform_period_T_composed_annualPooled.csv
+# Writes: Plots/MultiPlatform/CastCounts_AnnualPooled_Clean/sampling_support_3x4_final.{png,pdf}
 
 from pathlib import Path
 import numpy as np
@@ -7,13 +9,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import STATS, PLOTS
+
 
 # ======================
 # CONFIG
 # ======================
 
-IN_CSV = Path("/Users/elena/Projects/IRB/MedClim/Stats/cast_counts_bybin_by_platform_period_T_composed_annualPooled.csv")
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/CastCounts_AnnualPooled_Clean")
+IN_CSV = STATS / "cast_counts_bybin_by_platform_period_T_composed_annualPooled.csv"
+OUTDIR = PLOTS / "MultiPlatform" / "CastCounts_AnnualPooled_Clean"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 BASINS = ["NWM", "ION", "LEV"]

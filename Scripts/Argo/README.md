@@ -46,6 +46,6 @@ This directory contains the Mediterranean Argo-only workflow used in the MedClim
 
 ## Notes
 
-- Scripts currently use local hard-coded paths.
+- Paths are resolved through `Scripts/paths.py` (see the repository README).
 - Large raw/intermediate datasets are not tracked in Git.
 - Outputs are typically written to project-level `Data/`, `Plots/`, `Results/`, or `Diagnostics/` directories.

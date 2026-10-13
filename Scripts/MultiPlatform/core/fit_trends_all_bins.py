@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins[_composed].csv (--mode atomic|composed)
+# Writes: Results/Trends[/Composed]/linear_trends_20c_21c_<mode>.csv, quad_trend_accel_fullperiod_<mode>.csv
 
 """
 fit_trends_all_bins.py
@@ -55,12 +57,18 @@ import numpy as np
 import pandas as pd
 from math import erf, sqrt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import RESULTS
+
 
 # =========================
 # USER CONFIG
 # =========================
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends"
+BASE_DIR = str(RESULTS / "Trends")
 
 PATHS = {
     "atomic": {

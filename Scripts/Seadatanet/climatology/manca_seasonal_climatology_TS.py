@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv
+# Writes: Data/Seadatanet/climatology_sdn_<period>_{pass1,after_1sigma}.csv
 
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
 # ---- INPUT COLUMNS (adjust if needed) ----
 DATE_COL    = "yyyy-mm-ddThh:mm:ss.sss"
@@ -445,7 +452,7 @@ def dump_csv(accT, accS, out_csv):
     print("Wrote:", out_csv)
 
 def main():
-    INFILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv")
+    INFILE = DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins.csv"
     OUTDIR = INFILE.parent
 
     print("\nSeaDataNet seasonal climatology (multi-period; RR + 1-sigma)")

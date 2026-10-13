@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins.csv; Basins/manca.py (basin rectangles)
+# Writes: Plots/MultiPlatform/DeltaMaps/DeltaMaps_OVERALL_3rows_T_S_SIG0_DESEASONEDMONTHLY_*.png
 
 """
 Overall Δ(21c−20c) maps over Manca basins computed from MONTHLY MEANS,
@@ -39,14 +41,19 @@ from shapely.geometry import Polygon
 
 from scipy.optimize import curve_fit
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS, MANCA_PY
+
 
 # ==========================================================
 # HARD-CODED PATHS / SETTINGS (EDIT THESE)
 # ==========================================================
 
-IN_CSV   = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
-OUTDIR   = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/DeltaMaps"
+IN_CSV   = str(RESULTS / "Trends" / "monthly_timeseries_all_bins.csv")
+OUTDIR   = str(PLOTS / "MultiPlatform" / "DeltaMaps")
 
 # Century windows
 Y20A, Y20B = 1950, 1999

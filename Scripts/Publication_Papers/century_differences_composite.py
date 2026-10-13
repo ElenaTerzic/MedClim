@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins.csv, Stats/MultiSource_Climatology_BINNED_ELIG/*/POOLED_RAW/climatology_POOLED_RAW_*_composed_after_sigma.csv, Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv (T-S panels); Basins/manca.py
+# Writes: Plots/Paper_Figures/Figure2_composite_maps_profiles_TS.{png,pdf}
 
 """
 Figure 2 prototype for Nature-style paper
@@ -67,26 +69,29 @@ except Exception:
 
 from scipy.optimize import curve_fit
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import REPO_ROOT, STATS, PLOTS, RESULTS, MANCA_PY
+
 
 # ==========================================================
 # USER SETTINGS
 # ==========================================================
 
 # --- project paths ---
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
 
 # --- map data: same input as working delta maps ---
-MONTHLY_TIMESERIES_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
+MONTHLY_TIMESERIES_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins.csv")
 
 # --- climatology CSVs: composed basins ---
-CLIM_21C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/21c_2000_2025/POOLED_RAW/climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv"
-CLIM_20C_COMPOSED_CSV = "/Users/elena/Projects/IRB/MedClim/Stats/MultiSource_Climatology_BINNED_ELIG/20c_1950_1999/POOLED_RAW/climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv"
+CLIM_21C_COMPOSED_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "21c_2000_2025" / "POOLED_RAW" / "climatology_POOLED_RAW_21c_2000_2025_composed_after_sigma.csv")
+CLIM_20C_COMPOSED_CSV = str(STATS / "MultiSource_Climatology_BINNED_ELIG" / "20c_1950_1999" / "POOLED_RAW" / "climatology_POOLED_RAW_20c_1950_1999_composed_after_sigma.csv")
 
 # --- raw profile sources (same philosophy as T-S script) ---
-PROJECT_ROOT = "/Users/elena/Projects/IRB/MedClim"
+PROJECT_ROOT = str(REPO_ROOT)
 
 # --- output ---
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+OUTDIR = str(PLOTS / "Paper_Figures")
 OUTPNG = os.path.join(OUTDIR, "Figure2_composite_maps_profiles_TS.png")
 OUTPDF = os.path.join(OUTDIR, "Figure2_composite_maps_profiles_TS.pdf")
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv
+# Writes: Plots/Paper_Figures/Figure4_vertical_trend_acceleration_3basins_horizontal.{png,pdf}
 
 """
 plot_figure4_vertical_trend_bars_composed_3_basins_horizontal.py
@@ -36,14 +38,19 @@ from matplotlib.patches import Rectangle
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import PLOTS, RESULTS
+
 
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
+IN_CSV = str(RESULTS / "Trends" / "Composed" / "quad_trend_accel_fullperiod_composed.csv")
 
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+OUT_DIR = str(PLOTS / "Paper_Figures")
 OUT_NAME = "Figure4_vertical_trend_acceleration_3basins_horizontal.png"
 
 BASINS = ["NWM", "ION", "LEV"]

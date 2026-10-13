@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Argo/Chunks/download_failures.csv; Argo GDAC via argopy (network)
+# Writes: Data/Argo/Chunks/argo_med_phy_*.nc, download_log.csv, download_failures.csv
 """
 retry_failed_chunks_regions.py
 ------------------------------

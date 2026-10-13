@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Basins.manca polygons (installed package); Natural Earth land polygons via cartopy
+# Writes: Plots/BasinMaps_MapPlotter/{atomic,composed}_manca_basins_satellite_coastmasked.png
 
 """
 MapPlotter satellite maps of Manca Mediterranean basins,
@@ -40,12 +42,17 @@ from shapely.geometry import Point
 from shapely.ops import unary_union
 from shapely.prepared import prep
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS
+
 
 # ==========================================================
 # OUTPUT / PATHS
 # ==========================================================
 
-OUT_DIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/BasinMaps_MapPlotter")
+OUT_DIR = PLOTS / "BasinMaps_MapPlotter"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUT_ATOMIC = OUT_DIR / "atomic_manca_basins_satellite_coastmasked.png"

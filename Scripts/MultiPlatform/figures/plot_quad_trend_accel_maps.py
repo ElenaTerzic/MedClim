@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/quad_trend_accel_fullperiod_atomic.csv; Basins/manca.py (basin rectangles)
+# Writes: Plots/MultiPlatform/Trends/Fig2_quad_trend_accel_<depth>.png
 
 """
 Figure 2: Quadratic-fit trend + acceleration mapped by polygons.
@@ -39,13 +41,18 @@ import cartopy.feature as cfeature
 from shapely.geometry import Polygon
 from matplotlib.gridspec import GridSpec
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS, MANCA_PY
+
 
 # ==========================================================
 # EMBEDDED CONFIG
 # ==========================================================
-IN_CSV  = "/Users/elena/Projects/IRB/MedClim/Results/Trends/quad_trend_accel_fullperiod_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends"
+IN_CSV  = str(RESULTS / "Trends" / "quad_trend_accel_fullperiod_atomic.csv")
+OUT_DIR = str(PLOTS / "MultiPlatform" / "Trends")
 
 DEPTH_TAGS = ["0-10", "200", "1000", "2000"]
 DPI = 220

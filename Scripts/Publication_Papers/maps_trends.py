@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/quad_trend_accel_fullperiod_atomic.csv; Basins/manca.py (basin rectangles)
+# Writes: Plots/Paper_Figures/<OUT_BASENAME>.{png,pdf}
 
 """
 Figure 3: publication-style combined trend/acceleration maps
@@ -36,13 +38,18 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from shapely.geometry import Polygon
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import PLOTS, RESULTS, MANCA_PY
+
 
 # ==========================================================
 # EMBEDDED CONFIG
 # ==========================================================
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/quad_trend_accel_fullperiod_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Paper_Figures"
+IN_CSV = str(RESULTS / "Trends" / "quad_trend_accel_fullperiod_atomic.csv")
+OUT_DIR = str(PLOTS / "Paper_Figures")
 
 OUT_BASENAME = "Figure3_trend_accel_surface_1000m"
 

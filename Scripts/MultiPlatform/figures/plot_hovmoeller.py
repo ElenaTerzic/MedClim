@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins_composed.csv
+# Writes: Plots/Hovmoeller_Composed/hovmoeller_<basin>.png
 
 """
 Hovmöller diagrams (year x depth) for composed Mediterranean basins.
@@ -48,12 +50,17 @@ from matplotlib.colors import TwoSlopeNorm
 import matplotlib as mpl
 import cmocean
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS
+
 # ==========================================================
 # USER SETTINGS
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Hovmoeller_Composed"
+IN_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins_composed.csv")
+OUT_DIR = str(PLOTS / "Hovmoeller_Composed")
 
 # Plot which basins; if None, infer from file
 BASINS_TO_PLOT = None

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/monthly_timeseries_all_bins.csv
+# Writes: Results/Trends/monthly_timeseries_all_bins_composed.csv
 
 """
 build_monthly_timeseries_composed_from_atomic.py
@@ -57,13 +59,18 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import RESULTS
+
 
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
-OUT_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins_composed.csv"
+IN_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins.csv")
+OUT_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins_composed.csv")
 
 # Prefer this explicit dictionary first.
 # Adjust if your exact composed naming differs.

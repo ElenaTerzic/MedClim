@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/linear_trends_20c_21c_atomic.csv; Basins/manca.py (basin rectangles)
+# Writes: Plots/MultiPlatform/Trends/LinearTrends_CoastMask_{20c,21c,Delta_21c_minus_20c}.png
 
 from __future__ import annotations
 
@@ -16,15 +18,20 @@ from shapely.geometry import Polygon
 from matplotlib.gridspec import GridSpec
 from matplotlib.transforms import Bbox
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import PLOTS, RESULTS, MANCA_PY
+
 
 # ==========================================================
 # HARD-CODED INPUTS / OUTPUTS / SETTINGS
 # ==========================================================
 
-IN_CSV   = "/Users/elena/Projects/IRB/MedClim/Results/Trends/linear_trends_20c_21c_atomic.csv"
-MANCA_PY = "/Users/elena/Projects/Basins/Basins/manca.py"
+IN_CSV   = str(RESULTS / "Trends" / "linear_trends_20c_21c_atomic.csv")
 
-OUTDIR   = "/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/Trends"
+OUTDIR   = str(PLOTS / "MultiPlatform" / "Trends")
 BASENAME = "LinearTrends_CoastMask"
 
 VARS = ["T", "S", "SIG0"]

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/Composed/{linear_trends_20c_21c,quad_trend_accel_fullperiod}_composed.csv
+# Writes: Results/Trends/Robustness/ModelComparison_composed/robustness_model_comparison_{profiles.png,profiles.pdf,merged.csv}
 
 """
 robustness_model_comparison.py
@@ -34,13 +36,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import RESULTS
+
 
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-BASE_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Robustness/ModelComparison_composed"
+BASE_DIR = str(RESULTS / "Trends" / "Composed")
+OUT_DIR = str(RESULTS / "Trends" / "Robustness" / "ModelComparison_composed")
 
 LINEAR_CSV = os.path.join(BASE_DIR, "linear_trends_20c_21c_composed.csv")
 QUAD_CSV   = os.path.join(BASE_DIR, "quad_trend_accel_fullperiod_composed.csv")

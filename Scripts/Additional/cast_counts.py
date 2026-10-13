@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv
+# Writes: Stats/cast_counts_bybin_by_platform_period_T_{atomic,composed}_annualPooled.csv, Plots/MultiPlatform/CastCounts_AnnualPooled/*.png
 
 """
 Plot annual-pooled cast counts by depth bin for COMPOSED basins.
@@ -38,6 +40,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import DATA, STATS, PLOTS
+
 
 # =============================================================================
 # CONFIG
@@ -57,7 +64,7 @@ STD_CENTERS = np.array([
 
 PLOT_ZMAX = 2000.0
 
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/MultiPlatform/CastCounts_AnnualPooled")
+OUTDIR = PLOTS / "MultiPlatform" / "CastCounts_AnnualPooled"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 CHUNKSIZE = 400_000
@@ -239,7 +246,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"),
+        path=DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv",
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -252,7 +259,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"),
+        path=DATA / "Argo" / "CSV" / "Argo_with_basins_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="basin",
         depth_col="PRES",
@@ -265,7 +272,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "CTD_HR_2019_2023_MFSD_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -276,7 +283,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "RB_Northern_Adriatic_Transect_1979_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -287,7 +294,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "Palagruza_Transect_1952_2018_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -298,7 +305,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv"),
+        path=DATA / "Adriatic" / "Processed" / "IOR_Adriatic_database_1987_2019_long_fixed_mainland_special_excluded.csv",
         time_col="TIME",
         basin_col="BASIN_3ADR_FIXED",
         depth_col="DEPTH_M",
@@ -676,14 +683,14 @@ def main():
         print("No data found. Check input paths.")
         return
 
-    out_csv_atomic = "/Users/elena/Projects/IRB/MedClim/Stats/cast_counts_bybin_by_platform_period_T_atomic_annualPooled.csv"
+    out_csv_atomic = str(STATS / "cast_counts_bybin_by_platform_period_T_atomic_annualPooled.csv")
     df_atomic.to_csv(out_csv_atomic, index=False)
     print("Wrote atomic:", out_csv_atomic)
 
     print("Aggregating to composed basins...")
     df_comp = aggregate_to_composed(df_atomic, COMPOSED_BASINS)
 
-    out_csv_comp = "/Users/elena/Projects/IRB/MedClim/Stats/cast_counts_bybin_by_platform_period_T_composed_annualPooled.csv"
+    out_csv_comp = str(STATS / "cast_counts_bybin_by_platform_period_T_composed_annualPooled.csv")
     df_comp.to_csv(out_csv_comp, index=False)
     print("Wrote composed:", out_csv_comp)
 

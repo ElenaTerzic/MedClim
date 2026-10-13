@@ -13,6 +13,10 @@ MedClim multiplatform analysis.
 - `read_IOR_Adriatic_database_1987_2019_big.py`
 - `read_IOR_Palagruza_1952_2018.py`
 - `read_IRB_Northern_Adriatic_Transect_1979_2018.py`
+- `diagnostics/fix_adriatic_outliers_per_basin.py` – run after the four readers, on their
+  long-format tables placed in `Data/Adriatic/Processed/`: reassigns casts tagged
+  `BASIN_3ADR == 'out'` to DJ1/DJ2/DJ3 by nearest centroid and writes the `*_long_fixed.csv`
+  tables (new column `BASIN_3ADR_FIXED`) that the MultiPlatform stages read.
 
 These scripts ingest the source XLSX/netCDF datasets and export harmonized long-format CSV
 files for downstream use. The Palagruža, RB Northern Adriatic, and IOR readers assign

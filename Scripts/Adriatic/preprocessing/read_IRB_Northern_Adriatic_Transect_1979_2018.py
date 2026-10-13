@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Adriatic/RB_Northern_Adriatic_Transect_1979_2018.nc
+# Writes: Plots/Adriatic/Northern_Adriatic_Transect/RB_Northern_Adriatic_Transect_1979_2018_long.csv and diagnostic figures
 """
 RB Northern Adriatic Transect netCDF (1979-2018):
 - Print time span, station list/locations, depths, missingness
@@ -15,11 +17,16 @@ import xarray as xr
 import matplotlib.pyplot as plt
 import MapPlotter as mp
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # -----------------------------
 # INPUT / OUTPUT
 # -----------------------------
-NC_FILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/RB_Northern_Adriatic_Transect_1979_2018.nc")
-OUTDIR  = Path("/Users/elena/Projects/IRB/MedClim/Plots/Adriatic/Northern_Adriatic_Transect")
+NC_FILE = DATA / "Adriatic" / "RB_Northern_Adriatic_Transect_1979_2018.nc"
+OUTDIR  = PLOTS / "Adriatic" / "Northern_Adriatic_Transect"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 

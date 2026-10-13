@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv (SOURCES of multi_source_seasonal_climatology.py)
+# Writes: Results/Trends/monthly_timeseries_all_bins.csv
 
 """
 Build monthly time series per basin × depth_bin × var
@@ -29,6 +31,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+from Scripts.paths import RESULTS
 
 from Scripts.MultiPlatform.core import multi_source_seasonal_climatology as msc
 
@@ -37,7 +40,7 @@ from Scripts.MultiPlatform.core import multi_source_seasonal_climatology as msc
 # SETTINGS
 # =========================
 
-OUT_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/monthly_timeseries_all_bins.csv"
+OUT_CSV = str(RESULTS / "Trends" / "monthly_timeseries_all_bins.csv")
 
 YEAR_MIN = 1950
 YEAR_MAX = 2025

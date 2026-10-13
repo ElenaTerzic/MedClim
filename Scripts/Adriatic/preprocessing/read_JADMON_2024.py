@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : <JADMON 2024 delivery>/{temperatura,salinitet}_2024.csv (paths.JADMON_2024_RAW)
+# Writes: Data/Adriatic/Processed/JADMON_2024_long.csv, Diagnostics/JADMON_2024/JADMON_2024_cast_summary.csv
 """
 Read the JADMON 2024 Adriatic CTD delivery into the standard long format.
 
@@ -44,17 +46,22 @@ import pandas as pd
 
 import Basins
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, DIAGNOSTICS, JADMON_2024_RAW
+
 # --------------------------------------------------
 # INPUT
 # --------------------------------------------------
-INDIR = Path("/Users/elena/Work/IRB/Podaci/Jadran_2024")
+INDIR = JADMON_2024_RAW
 TEMP_FILE = INDIR / "temperatura_2024.csv"
 SAL_FILE = INDIR / "salinitet_2024.csv"
 
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed")
+OUTDIR = DATA / "Adriatic" / "Processed"
 OUT_CSV = OUTDIR / "JADMON_2024_long.csv"
 
-DIAGDIR = Path("/Users/elena/Projects/IRB/MedClim/Diagnostics/JADMON_2024")
+DIAGDIR = DIAGNOSTICS / "JADMON_2024"
 
 STATION_HEADER_ROW = 5
 STATION_LAST_ROW = 76

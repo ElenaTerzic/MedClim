@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv
+# Writes: Plots/Supplement/Supp_vertical_trend_acceleration_{NADR_MADR_SADR,SIC_NAEG_SAEG,ALB_WEST_TYR}.{png,pdf}
 
 """
 Supplementary composite figures for quadratic-fit vertical structure (1950–2025)
@@ -32,12 +34,17 @@ from matplotlib.patches import Rectangle
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from Scripts.paths import PLOTS, RESULTS
+
 # ==========================================================
 # USER CONFIG
 # ==========================================================
 
-IN_CSV = "/Users/elena/Projects/IRB/MedClim/Results/Trends/Composed/quad_trend_accel_fullperiod_composed.csv"
-OUT_DIR = "/Users/elena/Projects/IRB/MedClim/Plots/Supplement"
+IN_CSV = str(RESULTS / "Trends" / "Composed" / "quad_trend_accel_fullperiod_composed.csv")
+OUT_DIR = str(PLOTS / "Supplement")
 
 SUPP_FIGURES = [
     {

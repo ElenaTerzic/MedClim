@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Adriatic/IOR_Palagruza_Transect_1952_2018.nc
+# Writes: Plots/Adriatic/Palagruza_Transect/Palagruza_Transect_1952_2018_long.csv and diagnostic figures
 """
 Explore IOR Palagruza Transect netCDF (1952-2018):
 - Print time/span, station list/locations, depths, missingness
@@ -15,12 +17,17 @@ import matplotlib.pyplot as plt
 
 import MapPlotter as mp
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 
 # -----------------------------
 # INPUT / OUTPUT
 # -----------------------------
-NC_FILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/IOR_Palagruza_Transect_1952_2018.nc")
-OUTDIR  = Path("/Users/elena/Projects/IRB/MedClim/Plots/Adriatic/Palagruza_Transect")
+NC_FILE = DATA / "Adriatic" / "IOR_Palagruza_Transect_1952_2018.nc"
+OUTDIR  = PLOTS / "Adriatic" / "Palagruza_Transect"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded{,_profile_diagnostics}.csv, sdn_argo_copies_pids.txt (or Data/Seadatanet/sdn_argo_copies.csv)
+# Writes: Data/Seadatanet/*_mainland_special_excluded_no_argo_copies{,_profile_diagnostics}.csv
 """Write the SeaDataNet master file without the copies of Argo profiles.
 
 Reads the cast ids listed by identify_argo_copies_in_seadatanet.py (the tracked
@@ -27,15 +29,18 @@ from pathlib import Path
 
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-DATA = PROJECT_ROOT / "Data/Seadatanet"
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
-MASTER = DATA / "Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"
-MASTER_OUT = DATA / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"
-DIAG = DATA / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv"
-DIAG_OUT = DATA / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies_profile_diagnostics.csv"
+SDN_DIR = DATA / "Seadatanet"
 
-LIST_CSV = DATA / "sdn_argo_copies.csv"
+MASTER = SDN_DIR / "Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"
+MASTER_OUT = SDN_DIR / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies.csv"
+DIAG = SDN_DIR / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_profile_diagnostics.csv"
+DIAG_OUT = SDN_DIR / "Seadatanet.profiles_only_with_basins_mainland_special_excluded_no_argo_copies_profile_diagnostics.csv"
+
+LIST_CSV = SDN_DIR / "sdn_argo_copies.csv"
 LIST_TXT = Path(__file__).resolve().parent / "sdn_argo_copies_pids.txt"
 
 CDI, CRUISE, STATION = "LOCAL_CDI_ID", "Cruise", "Station:METAVAR:INDEXED_TEXT"

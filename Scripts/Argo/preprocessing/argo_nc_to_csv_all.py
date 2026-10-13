@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Argo/Merged/argo_med_merged_qc.nc
+# Writes: Data/Argo/Merged/argo_med_all_sorted.csv
 """
 Convert merged Med Argo NetCDF to a profile-sorted CSV.
 
@@ -16,15 +18,19 @@ import pandas as pd
 import xarray as xr
 import os
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
+
 
 # ---------------------------------------------------------------------
 # User config
 # ---------------------------------------------------------------------
 
-PROJECT_ROOT = Path("/Users/elena/Projects/IRB/MedClim")
 
-IN_FILE = PROJECT_ROOT / "Data/Argo/Merged/argo_med_merged_qc.nc"
-OUT_FILE = PROJECT_ROOT / "Data/Argo/Merged/argo_med_all_sorted.csv"
+IN_FILE = DATA / "Argo/Merged/argo_med_merged_qc.nc"
+OUT_FILE = DATA / "Argo/Merged/argo_med_all_sorted.csv"
 
 
 # Name of the point dimension in the NetCDF

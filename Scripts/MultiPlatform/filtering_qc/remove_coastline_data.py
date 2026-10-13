@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv, Data/Argo/CSV/Argo_with_basins.csv, Data/Adriatic/Processed/*_long_fixed.csv
+# Writes: next to each input: *_mainland_special_excluded.csv, *_mainland_special_excluded_profile_diagnostics.csv, *_qc_map.png
 
 """
 v6 FAST: Exclude profiles/casts whose station position is influenced by:
@@ -44,6 +46,11 @@ import matplotlib.pyplot as plt
 
 from shapely.geometry import box
 from shapely.ops import unary_union
+
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
 
 # ==========================================================
@@ -146,7 +153,7 @@ class SourceSpec:
 SOURCES: List[SourceSpec] = [
     SourceSpec(
         name="SDN",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Seadatanet/Seadatanet.profiles_only_with_basins.csv"),
+        path=DATA / "Seadatanet" / "Seadatanet.profiles_only_with_basins.csv",
         time_col="yyyy-mm-ddThh:mm:ss.sss",
         basin_col="basin",
         depth_col="Depth [m]",
@@ -168,7 +175,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="ARGO",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/Argo_with_basins.csv"),
+        path=DATA / "Argo" / "CSV" / "Argo_with_basins.csv",
         time_col="TIME",
         time_format="%Y-%m-%dT%H:%M:%S",
         basin_col="basin",
@@ -188,7 +195,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="CTD_HR_2019_2023_MFSD",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/CTD_HR_2019_2023_MFSD_long_fixed.csv"),
+        path=DATA / "Adriatic" / "Processed" / "CTD_HR_2019_2023_MFSD_long_fixed.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -203,7 +210,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="RB_Northern_Adriatic_Transect_1979_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/RB_Northern_Adriatic_Transect_1979_2018_long_fixed.csv"),
+        path=DATA / "Adriatic" / "Processed" / "RB_Northern_Adriatic_Transect_1979_2018_long_fixed.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -218,7 +225,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="Palagruza_Transect_1952_2018",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/Palagruza_Transect_1952_2018_long_fixed.csv"),
+        path=DATA / "Adriatic" / "Processed" / "Palagruza_Transect_1952_2018_long_fixed.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",
@@ -233,7 +240,7 @@ SOURCES: List[SourceSpec] = [
     ),
     SourceSpec(
         name="IOR_Adriatic_database_1987_2019",
-        path=Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/Processed/IOR_Adriatic_database_1987_2019_long_fixed.csv"),
+        path=DATA / "Adriatic" / "Processed" / "IOR_Adriatic_database_1987_2019_long_fixed.csv",
         time_col="TIME",
         lon_col="LONGITUDE",
         lat_col="LATITUDE",

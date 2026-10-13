@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv
+# Writes: Data/Seadatanet/sdn_argo_copies.csv, Scripts/Seadatanet/preprocessing/sdn_argo_copies_pids.txt
 """Identify the SeaDataNet casts that are Argo float profiles already held by the Argo set.
 
 Why
@@ -50,11 +52,14 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA
 
-SDN = PROJECT_ROOT / "Data/Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"
-ARGO = PROJECT_ROOT / "Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"
-OUT_LIST = PROJECT_ROOT / "Data/Seadatanet/sdn_argo_copies.csv"
+
+SDN = DATA / "Seadatanet/Seadatanet.profiles_only_with_basins_mainland_special_excluded.csv"
+ARGO = DATA / "Argo/CSV/Argo_with_basins_mainland_special_excluded.csv"
+OUT_LIST = DATA / "Seadatanet/sdn_argo_copies.csv"
 OUT_PIDS = Path(__file__).resolve().parent / "sdn_argo_copies_pids.txt"
 
 Y0, Y1 = 1950, 2025

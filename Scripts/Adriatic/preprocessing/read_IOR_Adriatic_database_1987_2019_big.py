@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Reads : Data/Adriatic/IOR_Adriatic_database_1987_2019.nc
+# Writes: Plots/Adriatic/IOR_Adriatic_database_1987_2019/IOR_Adriatic_database_1987_2019_long.csv, IOR_database_station_map.png
 """
 Huge netCDF streaming reader for:
 IOR_Adriatic_database_1987_2019.nc
@@ -16,11 +18,16 @@ import matplotlib.pyplot as plt
 import MapPlotter as mp
 from netCDF4 import Dataset, num2date
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # -----------------------------
 # INPUT / OUTPUT
 # -----------------------------
-NC_FILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Adriatic/IOR_Adriatic_database_1987_2019.nc")
-OUTDIR  = Path("/Users/elena/Projects/IRB/MedClim/Plots/Adriatic/IOR_Adriatic_database_1987_2019")
+NC_FILE = DATA / "Adriatic" / "IOR_Adriatic_database_1987_2019.nc"
+OUTDIR  = PLOTS / "Adriatic" / "IOR_Adriatic_database_1987_2019"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # Export toggle (set False if you only want inventory/plots first)

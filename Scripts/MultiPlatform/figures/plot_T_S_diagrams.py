@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Seadatanet/*_mainland_special_excluded_no_argo_copies.csv, Data/Argo/CSV/Argo_with_basins_mainland_special_excluded.csv, Data/Adriatic/Processed/*_long_fixed_mainland_special_excluded.csv (SOURCES of multi_source_seasonal_climatology.py)
+# Writes: Plots/MultiSource_Climatology/TS_2x2_composed_regions_depthcoded_masked.png (+ _CACHE.parquet)
 
 """
 2x2 T–S diagrams for composed regions (alb, nwm, ion, lev)
@@ -35,6 +37,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+from Scripts.paths import PLOTS
 
 try:
     from Scripts.MultiPlatform.core import multi_source_seasonal_climatology as msc
@@ -82,7 +85,7 @@ COL_CANDIDATES = {
 MAX_POINTS_PER_REGION_PERIOD = None
 RANDOM_SEED = 7
 
-OUTDIR = "/Users/elena/Projects/IRB/MedClim/Plots/MultiSource_Climatology"
+OUTDIR = str(PLOTS / "MultiSource_Climatology")
 OUTPNG = os.path.join(OUTDIR, "TS_2x2_composed_regions_depthcoded_masked.png")
 CACHE_PARQUET = os.path.join(OUTDIR, "TS_2x2_composed_regions_depthcoded_masked_CACHE.parquet")
 DPI = 300

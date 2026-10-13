@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Reads : Data/Argo/CSV/argo_manca_like_TS_after_1sigma.csv
+# Writes: Plots/Argo/Seasonal_Profiles_Per_Basin/<basin>_seasonal_profiles_TS.png
 
 from pathlib import Path
 import numpy as np
@@ -7,11 +9,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
+# Repository-relative paths (Scripts/paths.py); MEDCLIM_DATA relocates Data/, Stats/, Plots/, Results/, Diagnostics/.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from Scripts.paths import DATA, PLOTS
+
 # -----------------------------
 # INPUT / OUTPUT
 # -----------------------------
-INFILE = Path("/Users/elena/Projects/IRB/MedClim/Data/Argo/CSV/argo_manca_like_TS_after_1sigma.csv")
-OUTDIR = Path("/Users/elena/Projects/IRB/MedClim/Plots/Argo") / "Seasonal_Profiles_Per_Basin"
+INFILE = DATA / "Argo" / "CSV" / "argo_manca_like_TS_after_1sigma.csv"
+OUTDIR = PLOTS / "Argo" / "Seasonal_Profiles_Per_Basin"
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------
